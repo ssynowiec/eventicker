@@ -16,10 +16,10 @@
     "jiti": "^1.21.6",
     "lucia": "^3.2.0",
     "lucide-react": "^0.428.0",
-    "next": "14.2.5",
+    "next": "15.0.0-canary.120",
     "next-themes": "^0.3.0",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.0.0-rc-1eaccd82-20240816",
+    "react-dom": "19.0.0-rc-1eaccd82-20240816",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
