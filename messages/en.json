@@ -1,0 +1,9 @@
+{
+	"Dashboard": {
+		"title": "Dashboard",
+		"Sidebar": {
+			"hide": "Hide sidebar",
+			"show": "Show sidebar"
+		}
+	}
+}

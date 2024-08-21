@@ -1,0 +1,9 @@
+{
+	"Dashboard": {
+		"title": "Pulpit",
+		"Sidebar": {
+			"hide": "Ukryj sidebar",
+			"show": "Pokaż sidebar"
+		}
+	}
+}
