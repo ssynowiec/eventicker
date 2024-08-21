@@ -15,7 +15,13 @@
 		}
 	},
 	"Profile": {
-		"title": "Profile"
+		"title": "Profile",
+		"myData": "My data",
+		"socialMedia": "Social media",
+		"connected": "Connected",
+		"disconnected": "Not connected",
+		"dangerZone": "Danger zone",
+		"delete": "Delete account"
 	},
 	"Theme": {
 		"change": "Change theme to",
