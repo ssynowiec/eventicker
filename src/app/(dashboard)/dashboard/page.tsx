@@ -1,7 +1,9 @@
+import { PageTitle } from '@/components/PageTitle';
+
 const DashboardPage = () => {
 	return (
 		<div>
-			<h1>Content</h1>
+			<PageTitle>Dashboard</PageTitle>
 		</div>
 	);
 };
