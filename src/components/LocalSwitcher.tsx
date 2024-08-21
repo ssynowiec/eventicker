@@ -27,11 +27,11 @@ export const LocalSwitcher = () => {
 
 	return (
 		<Select defaultValue={currentLocale} onValueChange={changeLocale}>
-			<SelectTrigger className="w-[10px]">
+			<SelectTrigger className="w-[65px]">
 				<SelectValue
 					placeholder={
 						<Image
-							src={`/${currentLocale}.png`}
+							src={`/locales/${currentLocale}.png`}
 							alt={currentLocale}
 							width={24}
 							height={24}
@@ -41,10 +41,10 @@ export const LocalSwitcher = () => {
 			</SelectTrigger>
 			<SelectContent>
 				<SelectItem value="pl">
-					<Image src="/pl.png" alt="pl" width={24} height={24} />
+					<Image src="/locales/pl.png" alt="pl" width={24} height={24} />
 				</SelectItem>
 				<SelectItem value="en">
-					<Image src="/en.png" alt="en" width={24} height={24} />
+					<Image src="/locales/en.png" alt="en" width={24} height={24} />
 				</SelectItem>
 			</SelectContent>
 		</Select>
