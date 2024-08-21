@@ -43,7 +43,7 @@ export const GET = async (request: Request): Promise<Response> => {
 			return new Response(null, {
 				status: 302,
 				headers: {
-					Location: '/',
+					Location: '/dashboard',
 				},
 			});
 		}
@@ -52,8 +52,11 @@ export const GET = async (request: Request): Promise<Response> => {
 
 		await db.insert(userTable).values({
 			id: userId,
-			github_id: githubUser.id,
+			name: githubUser.name,
 			username: githubUser.login,
+			email: githubUser.email,
+			avatar: githubUser.avatar_url,
+			github_id: githubUser.id,
 		});
 
 		const session = await lucia.createSession(userId, {});
@@ -66,7 +69,7 @@ export const GET = async (request: Request): Promise<Response> => {
 		return new Response(null, {
 			status: 302,
 			headers: {
-				Location: '/',
+				Location: '/dashboard',
 			},
 		});
 	} catch (e) {
@@ -83,5 +86,8 @@ export const GET = async (request: Request): Promise<Response> => {
 
 interface GitHubUser {
 	id: string;
+	name: string;
 	login: string;
+	email: string;
+	avatar_url: string;
 }
