@@ -3,25 +3,30 @@ import { SidebarNavIcon } from '@/components/sidebar/SidebarNavIcon';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { SidebarNavLink } from '@/components/sidebar/SidebarNavLink';
 import type { ReactNode } from 'react';
-
-const NAV_LINKS = [
-	{
-		href: '/dashboard',
-		icon: <LayoutDashboard />,
-		children: 'Dashboard',
-	},
-	{
-		href: '/settings',
-		icon: <Settings />,
-		children: 'Settings',
-	},
-];
+import { useTranslations } from 'next-intl';
 
 interface SidebarNavProps {
 	isCollapsed: boolean;
 }
 
 export const SidebarNav = ({ isCollapsed }: SidebarNavProps) => {
+	const t = useTranslations('Dashboard.Sidebar.Menu');
+
+	const NAV_LINKS = [
+		{
+			href: '/dashboard',
+			name: 'dashboard',
+			icon: <LayoutDashboard />,
+			children: t('dashboard'),
+		},
+		{
+			href: '/settings',
+			name: 'settings',
+			icon: <Settings />,
+			children: t('settings'),
+		},
+	];
+
 	const renderSidebarNavLinkAndIcon = (
 		href: string,
 		icon: string | ReactNode,

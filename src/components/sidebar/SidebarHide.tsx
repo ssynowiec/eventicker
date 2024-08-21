@@ -7,6 +7,7 @@ import {
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
 import type { SetStateAction } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface SidebarHideProps {
 	isCollapsed: boolean;
@@ -17,6 +18,8 @@ export const SidebarHide = ({
 	isCollapsed,
 	setIsCollapsed,
 }: SidebarHideProps) => {
+	const t = useTranslations('Dashboard');
+
 	return (
 		<TooltipProvider>
 			<Tooltip delayDuration={0}>
@@ -31,13 +34,13 @@ export const SidebarHide = ({
 								<ChevronsRight />
 							</TooltipTrigger>
 							<TooltipContent side="right">
-								<p>Show sidebar</p>
+								<p>{t('Sidebar.show')}</p>
 							</TooltipContent>
 						</>
 					) : (
 						<>
 							<ChevronsLeft />
-							<span>Hide sidebar</span>
+							<span>{t('Sidebar.hide')}</span>
 						</>
 					)}
 				</Button>

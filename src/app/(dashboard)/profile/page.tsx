@@ -1,9 +1,11 @@
 import { PageTitle } from '@/components/PageTitle';
+import { useTranslations } from 'next-intl';
 
 const ProfilePage = () => {
+	const t = useTranslations('Profile');
 	return (
 		<div>
-			<PageTitle>Profile</PageTitle>
+			<PageTitle>{t('title')}</PageTitle>
 		</div>
 	);
 };

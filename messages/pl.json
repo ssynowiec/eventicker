@@ -3,7 +3,23 @@
 		"title": "Pulpit",
 		"Sidebar": {
 			"hide": "Ukryj sidebar",
-			"show": "Pokaż sidebar"
+			"show": "Pokaż sidebar",
+			"Menu": {
+				"dashboard": "Pulpit",
+				"settings": "Ustawienia",
+				"User": {
+					"profile": "Profil",
+					"logout": "Wyloguj"
+				}
+			}
 		}
+	},
+	"Profile": {
+		"title": "Profil"
+	},
+	"Theme": {
+		"change": "Zmień motyw na",
+		"light": "jasny",
+		"dark": "ciemny"
 	}
 }

@@ -11,6 +11,7 @@ import { SidebarUser } from '@/components/sidebar/SidebarUser';
 import Link from 'next/link';
 import { UserIcon } from 'lucide-react';
 import { LogoutButton } from '@/components/LogoutButton';
+import { useTranslations } from 'next-intl';
 
 interface SidebarUserMenuProps {
 	user: User;
@@ -21,6 +22,8 @@ export const SidebarUserMenu = ({
 	user,
 	isCollapsed,
 }: SidebarUserMenuProps) => {
+	const t = useTranslations('Dashboard.Sidebar.Menu.User');
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>
@@ -38,7 +41,7 @@ export const SidebarUserMenu = ({
 						prefetch={false}
 					>
 						<UserIcon className="h-4 w-4" />
-						<span>Profile</span>
+						<span>{t('profile')}</span>
 					</Link>
 				</DropdownMenuItem>
 				<LogoutButton />

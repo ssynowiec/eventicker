@@ -3,7 +3,23 @@
 		"title": "Dashboard",
 		"Sidebar": {
 			"hide": "Hide sidebar",
-			"show": "Show sidebar"
+			"show": "Show sidebar",
+			"Menu": {
+				"dashboard": "Dashboard",
+				"settings": "Settings",
+				"User": {
+					"profile": "Profile",
+					"logout": "Logout"
+				}
+			}
 		}
+	},
+	"Profile": {
+		"title": "Profile"
+	},
+	"Theme": {
+		"change": "Change theme to",
+		"light": "light",
+		"dark": "dark"
 	}
 }
