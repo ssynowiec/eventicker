@@ -1,4 +1,4 @@
-import { LayoutDashboard, Settings } from 'lucide-react';
+import { CalendarDays, LayoutDashboard, Settings } from 'lucide-react';
 import { SidebarNavIcon } from '@/components/sidebar/SidebarNavIcon';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { SidebarNavLink } from '@/components/sidebar/SidebarNavLink';
@@ -18,6 +18,12 @@ export const SidebarNav = ({ isCollapsed }: SidebarNavProps) => {
 			name: 'dashboard',
 			icon: <LayoutDashboard />,
 			children: t('dashboard'),
+		},
+		{
+			href: '/dashboard/events',
+			name: 'events',
+			icon: <CalendarDays />,
+			children: t('events'),
 		},
 		{
 			href: '/settings',

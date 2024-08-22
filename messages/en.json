@@ -20,9 +20,15 @@
 				"User": {
 					"profile": "Profile",
 					"logout": "Logout"
-				}
+				},
+				"events": "Events"
 			}
 		}
+	},
+	"Events": {
+		"title": "Events",
+		"noEvents": "No events available",
+		"addEvent": "Add event"
 	},
 	"Profile": {
 		"title": "Profile",
