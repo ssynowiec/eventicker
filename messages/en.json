@@ -1,4 +1,14 @@
 {
+	"Login": {
+		"title": "Login page",
+		"cardTitle": "Login",
+		"loginWith": "Login with",
+		"consent": "By logging in, you agree to our",
+		"terms": "Terms of Service",
+		"and": "and",
+		"privacy": "Privacy Policy",
+		"backToHome": "Back to homepage"
+	},
 	"Dashboard": {
 		"title": "Dashboard",
 		"Sidebar": {

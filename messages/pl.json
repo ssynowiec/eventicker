@@ -1,4 +1,14 @@
 {
+	"Login": {
+		"title": "Strona logowania",
+		"cardTitle": "Zaloguj się",
+		"loginWith": "Zaloguj się za pomocą",
+		"consent": "Logując się, zgadzasz się na nasze",
+		"terms": "Warunki Świadczenia Usług",
+		"and": "i",
+		"privacy": "Politykę Prywatności",
+		"backToHome": "Powrót do strony głównej"
+	},
 	"Dashboard": {
 		"title": "Pulpit",
 		"Sidebar": {
