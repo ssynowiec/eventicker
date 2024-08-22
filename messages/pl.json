@@ -27,5 +27,9 @@
 		"change": "Zmień motyw na",
 		"light": "jasny",
 		"dark": "ciemny"
+	},
+	"NotFound": {
+		"title": "Oops! Strona nie znaleziona",
+		"message": "Wygląda na to, że strona, której szukasz \nnie istnieje lub została usunięta."
 	}
 }

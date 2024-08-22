@@ -27,5 +27,9 @@
 		"change": "Change theme to",
 		"light": "light",
 		"dark": "dark"
+	},
+	"NotFound": {
+		"title": "Oops! Page not found",
+		"message": "It seems like the page you're looking for \ndoes not exist or might have been removed."
 	}
 }
