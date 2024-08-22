@@ -5,7 +5,7 @@ import { github } from '@/lib/auth/github';
 import { lucia } from '@/lib/auth/auth';
 import { db } from '@/lib/auth/db';
 import { eq } from 'drizzle-orm';
-import { userTable } from '@/lib/auth/schema/user';
+import { userTable } from '@/schema/user';
 
 export const GET = async (request: Request): Promise<Response> => {
 	const url = new URL(request.url);
