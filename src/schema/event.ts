@@ -1,4 +1,5 @@
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { createSelectSchema } from 'drizzle-zod';
 import { userTable } from '@/schema/user';
 
 export const eventTable = pgTable('event', {
@@ -11,9 +12,13 @@ export const eventTable = pgTable('event', {
 		.notNull()
 		.references(() => userTable.id),
 
-	created_at: timestamp('created_at').defaultNow().notNull(),
-	updated_at: timestamp('updated_at')
+	created_at: timestamp('created_at', { mode: 'string' })
+		.defaultNow()
+		.notNull(),
+	updated_at: timestamp('updated_at', { mode: 'string' })
 		.defaultNow()
 		.notNull()
-		.$onUpdate(() => new Date()),
+		.$onUpdate(() => new Date().toDateString()),
 });
+
+export const selectEventsSchema = createSelectSchema(eventTable).array();
