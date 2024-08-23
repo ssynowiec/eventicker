@@ -28,7 +28,26 @@
 	"Events": {
 		"title": "Events",
 		"noEvents": "No events available",
-		"addEvent": "Add event"
+		"addEvent": "Add event",
+		"NewEvent": {
+			"title": "Add new event",
+			"Form": {
+				"eventName": "Event name",
+				"eventNamePlaceholder": "Example event",
+				"eventNameDescription": "Name of the event",
+				"eventSlug": "Slug",
+				"eventSlugPlaceholder": "example-event",
+				"eventSlugDescription": "Slug of the event",
+				"eventDescription": "Description",
+				"eventDescriptionPlaceholder": "This is an example event",
+				"eventDescriptionDescription": "Description of the event",
+				"eventStartDate": "Start date",
+				"pickStartDate": "Pick a start date",
+				"eventStartTime": "Start time",
+				"eventStartDate&TimeDescription": "Start date & time of the event",
+				"submit": "Add event"
+			}
+		}
 	},
 	"Profile": {
 		"title": "Profile",

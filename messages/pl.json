@@ -28,7 +28,26 @@
 	"Events": {
 		"title": "Wydarzenia",
 		"noEvents": "Brak dostępnych wydarzeń",
-		"addEvent": "Dodaj wydarzenie"
+		"addEvent": "Dodaj wydarzenie",
+		"NewEvent": {
+			"title": "Dodaj nowe wydarzenie",
+			"Form": {
+				"eventName": "Nazwa wydarzenia",
+				"eventNamePlaceholder": "Przykładowe wydarzenie",
+				"eventNameDescription": "Nazwa wydarzenia",
+				"eventSlug": "Slug",
+				"eventSlugPlaceholder": "przykladowe-wydarzenie",
+				"eventSlugDescription": "Slug wydarzenia",
+				"eventDescription": "Opis",
+				"eventDescriptionPlaceholder": "To jest przykładowe wydarzenie",
+				"eventDescriptionDescription": "Opis wydarzenia",
+				"eventStartDate": "Data rozpoczęcia",
+				"pickStartDate": "Wybierz datę rozpoczęcia",
+				"eventStartTime": "Godzina rozpoczęcia",
+				"eventStartDate&TimeDescription": "Data i godzina rozpoczęcia wydarzenia",
+				"submit": "Dodaj wydarzenie"
+			}
+		}
 	},
 	"Profile": {
 		"title": "Profil",
