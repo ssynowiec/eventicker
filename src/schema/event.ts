@@ -1,5 +1,5 @@
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
-import { createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { userTable } from '@/schema/user';
 
 export const eventTable = pgTable('event', {
@@ -22,3 +22,4 @@ export const eventTable = pgTable('event', {
 });
 
 export const selectEventsSchema = createSelectSchema(eventTable).array();
+export const insertEventSchema = createInsertSchema(eventTable);
