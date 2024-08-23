@@ -7,7 +7,6 @@ export const Logo = () => {
 	const { theme } = useTheme();
 
 	const logoColor = theme === 'dark' ? 'light' : 'dark';
-	console.log(theme);
 
 	return (
 		<Image
