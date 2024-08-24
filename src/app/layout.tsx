@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import type { ReactNode } from 'react';
 import { getLocale, getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
+import { QueryProvider } from '@/components/QueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,11 +26,11 @@ const RootLayout = async ({
 	const messages = await getMessages();
 
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang={locale} suppressHydrationWarning>
 			<body className={inter.className}>
 				<ThemeProvider attribute="class" defaultTheme="system">
 					<NextIntlClientProvider messages={messages}>
-						{children}
+						<QueryProvider>{children}</QueryProvider>
 					</NextIntlClientProvider>
 				</ThemeProvider>
 			</body>
