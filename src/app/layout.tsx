@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 import { getLocale, getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { QueryProvider } from '@/components/QueryProvider';
-import { Toaster } from 'sonner';
+import { ToasterWithTheme } from '@/components/ToasterWithTheme';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,7 +33,7 @@ const RootLayout = async ({
 					<NextIntlClientProvider messages={messages}>
 						<QueryProvider>
 							{children}
-							<Toaster />
+							<ToasterWithTheme />
 						</QueryProvider>
 					</NextIntlClientProvider>
 				</ThemeProvider>
