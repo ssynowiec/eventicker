@@ -1,6 +1,5 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
 import {
 	Form,
 	FormControl,
@@ -12,8 +11,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import {
 	Popover,
 	PopoverContent,
@@ -23,7 +20,6 @@ import { cn } from '@/lib/utils';
 import { format, type Locale, subDays } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
-import { insertEventSchema } from '@/schema/event';
 import { Textarea } from '@/components/ui/textarea';
 import { useLocale, useTranslations } from 'next-intl';
 import { RequiredField } from '@/components/RequiredField';
@@ -36,8 +32,9 @@ import {
 } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { enUS, pl } from 'date-fns/locale';
-
-const newEventSchema = insertEventSchema;
+import _ from 'lodash';
+import { SlugInput } from '@/components/SlugInput';
+import { useNewEventForm } from '@/hooks/useNewEventForm';
 
 const dateLocaleMapping: { [key: string]: Locale } = {
 	pl: pl,
@@ -48,27 +45,7 @@ export const NewEventForm = () => {
 	const t = useTranslations('Events.NewEvent.Form');
 	const locale = useLocale();
 
-	const form = useForm<z.infer<typeof newEventSchema>>({
-		resolver: zodResolver(newEventSchema),
-		defaultValues: {
-			name: '',
-			slug: '',
-			description: '',
-			start_date: '',
-			creator_id: '',
-		},
-	});
-
-	const onSubmit = form.handleSubmit(async (data) => {
-		// const res = await fetch('/api/event', {
-		// 	method: 'POST',
-		// 	credentials: 'include',
-		// 	headers: {
-		// 		Cookie: `session_id=${session_id}`,
-		// 	},
-		// });
-		console.log(data);
-	});
+	const { form, onSubmit, checkSlugAvailability } = useNewEventForm();
 
 	return (
 		<Form {...form}>
@@ -83,29 +60,26 @@ export const NewEventForm = () => {
 								<RequiredField />
 							</FormLabel>
 							<FormControl>
-								<Input placeholder={t('eventNamePlaceholder')} {...field} />
+								<Input
+									placeholder={t('eventNamePlaceholder')}
+									{...field}
+									onChange={(e) => {
+										const slugField = form.getValues('slug');
+										if (slugField === _.kebabCase(field.value))
+											form.setValue('slug', _.kebabCase(e.target.value));
+										field.onChange(e.target.value);
+									}}
+								/>
 							</FormControl>
 							<FormDescription>{t('eventNameDescription')}</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={form.control}
+				<SlugInput
+					form={form}
 					name="slug"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>
-								{t('eventSlug')}
-								<RequiredField />
-							</FormLabel>
-							<FormControl>
-								<Input placeholder={t('eventSlugPlaceholder')} {...field} />
-							</FormControl>
-							<FormDescription>{t('eventSlugDescription')}</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
+					checkSlugAvailability={checkSlugAvailability}
 				/>
 				<FormField
 					control={form.control}
