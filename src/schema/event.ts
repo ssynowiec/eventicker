@@ -22,4 +22,5 @@ export const eventTable = pgTable('event', {
 });
 
 export const selectEventsSchema = createSelectSchema(eventTable).array();
+export const selectEventSchema = createSelectSchema(eventTable);
 export const insertEventSchema = createInsertSchema(eventTable);
