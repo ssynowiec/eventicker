@@ -38,6 +38,11 @@
 				"eventSlug": "Slug",
 				"eventSlugPlaceholder": "przykladowe-wydarzenie",
 				"eventSlugDescription": "Slug wydarzenia",
+				"invalidSlug": "Nieprawidłowy slug",
+				"unavailableSlug": "Slug jest już zajęty",
+				"checkingSlugAvailability": "Sprawdzanie dostępności slug...",
+				"slugIsNotAvailable": "Slug jest niedostępny",
+				"slugIsAvailable": "Slug jest dostępny",
 				"eventDescription": "Opis",
 				"eventDescriptionPlaceholder": "To jest przykładowe wydarzenie",
 				"eventDescriptionDescription": "Opis wydarzenia",
@@ -45,6 +50,7 @@
 				"pickStartDate": "Wybierz datę rozpoczęcia",
 				"eventStartTime": "Godzina rozpoczęcia",
 				"eventStartDate&TimeDescription": "Data i godzina rozpoczęcia wydarzenia",
+				"fieldRequired": "jest wymagane",
 				"submit": "Dodaj wydarzenie"
 			}
 		}

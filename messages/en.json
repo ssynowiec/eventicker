@@ -38,6 +38,11 @@
 				"eventSlug": "Slug",
 				"eventSlugPlaceholder": "example-event",
 				"eventSlugDescription": "Slug of the event",
+				"invalidSlug": "Invalid slug",
+				"unavailableSlug": "Slug is already taken",
+				"checkingSlugAvailability": "Checking slug availability...",
+				"slugIsNotAvailable": "Slug is not available",
+				"slugIsAvailable": "Slug is available",
 				"eventDescription": "Description",
 				"eventDescriptionPlaceholder": "This is an example event",
 				"eventDescriptionDescription": "Description of the event",
@@ -45,6 +50,7 @@
 				"pickStartDate": "Pick a start date",
 				"eventStartTime": "Start time",
 				"eventStartDate&TimeDescription": "Start date & time of the event",
+				"fieldRequired": "is required",
 				"submit": "Add event"
 			}
 		}
