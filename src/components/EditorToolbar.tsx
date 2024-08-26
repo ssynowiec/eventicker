@@ -11,8 +11,9 @@ import {
 	Underline,
 	Undo,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { HeadingEditorFormat } from '@/components/HeadingEditorFormat';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { cn } from '@/lib/utils';
 
 interface EditorToolbarProps {
 	editor: Editor | null;
@@ -26,129 +27,173 @@ export const EditorToolbar = ({ editor, content }: EditorToolbarProps) => {
 
 	return (
 		<div className="rounded-t-md border-l border-r border-t border-input bg-secondary p-1">
-			<div className="flex gap-1">
-				<Button
-					variant={editor.isActive('bold') ? 'outline' : 'ghost'}
-					size="icon"
+			<ToggleGroup
+				className="flex justify-start gap-1"
+				type="multiple"
+				size="sm"
+			>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleBold().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('bold')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="bold"
 				>
 					<Bold className="h-4 w-4" />
 					<span className="sr-only">Bold</span>
-				</Button>
-				<Button
-					variant={editor.isActive('italic') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleItalic().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('italic')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="italic"
 				>
 					<Italic className="h-4 w-4" />
 					<span className="sr-only">Italic</span>
-				</Button>
-				<Button
-					variant={editor.isActive('underline') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleUnderline().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('underline')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="underline"
 				>
 					<Underline className="h-4 w-4" />
 					<span className="sr-only">Underline</span>
-				</Button>
-				<Button
-					variant={editor.isActive('strike') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleStrike().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('strike')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="strike"
 				>
 					<Strikethrough className="h-4 w-4" />
 					<span className="sr-only">Strike</span>
-				</Button>
-				<Button
-					variant={editor.isActive('bulletList') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleBulletList().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('bulletList')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="bullet-list"
 				>
 					<List className="h-4 w-4" />
 					<span className="sr-only">Bullet List</span>
-				</Button>
-				<Button
-					variant={editor.isActive('orderedList') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleOrderedList().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('orderedList')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="ordered-list"
 				>
 					<ListOrdered className="h-4 w-4" />
 					<span className="sr-only">Ordered List</span>
-				</Button>
-				<Button
-					variant={editor.isActive('blockquote') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().toggleBlockquote().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('blockquote')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="blockquote"
 				>
 					<Quote className="h-4 w-4" />
 					<span className="sr-only">Blockquote</span>
-				</Button>
-				<Button
-					variant={editor.isActive('code') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().setCode().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('code')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="code"
 				>
 					<Code className="h-4 w-4" />
 					<span className="sr-only">Code</span>
-				</Button>
-				<Button
-					variant={editor.isActive('undo') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().undo().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('undo')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="undo"
 				>
 					<Undo className="h-4 w-4" />
 					<span className="sr-only">Undo</span>
-				</Button>
-				<Button
-					variant={editor.isActive('redo') ? 'outline' : 'ghost'}
-					size="icon"
+				</ToggleGroupItem>
+				<ToggleGroupItem
 					onClick={(e) => {
 						e.preventDefault();
 						editor.chain().focus().redo().run();
 					}}
-					className="h-8 w-8 hover:bg-primary-foreground"
+					className={cn(
+						'border border-secondary hover:bg-primary-foreground',
+						editor.isActive('redo')
+							? 'border-accent-primary border bg-primary-foreground'
+							: '',
+					)}
+					value="redo"
 				>
 					<Redo className="h-4 w-4" />
 					<span className="sr-only">Redo</span>
-				</Button>
+				</ToggleGroupItem>
 				<HeadingEditorFormat editor={editor} />
-			</div>
+			</ToggleGroup>
 		</div>
 	);
 };
