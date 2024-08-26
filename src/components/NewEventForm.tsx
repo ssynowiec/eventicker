@@ -20,7 +20,6 @@ import { cn } from '@/lib/utils';
 import { format, type Locale, subDays } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
-import { Textarea } from '@/components/ui/textarea';
 import { useLocale, useTranslations } from 'next-intl';
 import { RequiredField } from '@/components/RequiredField';
 import {
@@ -35,6 +34,7 @@ import { enUS, pl } from 'date-fns/locale';
 import _ from 'lodash';
 import { SlugInput } from '@/components/SlugInput';
 import { useNewEventForm } from '@/hooks/useNewEventForm';
+import { TextRichEditor } from '@/components/TextRichEditor';
 
 const dateLocaleMapping: { [key: string]: Locale } = {
 	pl: pl,
@@ -91,11 +91,10 @@ export const NewEventForm = () => {
 								<RequiredField />
 							</FormLabel>
 							<FormControl>
-								<Textarea
+								<TextRichEditor
 									placeholder={t('eventDescriptionPlaceholder')}
-									className="resize-none"
-									{...field}
-									value={field.value ?? ''}
+									content={field.value ?? ''}
+									onChange={field.onChange}
 								/>
 							</FormControl>
 							<FormDescription>
