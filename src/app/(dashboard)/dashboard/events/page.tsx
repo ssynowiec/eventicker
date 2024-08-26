@@ -2,6 +2,10 @@ import { PageTitle } from '@/components/PageTitle';
 import { getTranslations } from 'next-intl/server';
 import { env } from '@/env';
 import { cookies } from 'next/headers';
+import { Loading } from '@/components/Loading';
+import { Suspense } from 'react';
+import { DataTable } from '@/components/dataTable/DataTable';
+import { eventsColumns } from '@/app/(dashboard)/dashboard/events/eventsColumns';
 import { selectEventsSchema } from '@/schema/event';
 
 const getEvents = async () => {
@@ -14,7 +18,7 @@ const getEvents = async () => {
 			Cookie: `session_id=${session_id}`,
 		},
 	});
-	
+
 	const events = await eventsRes.json();
 
 	return selectEventsSchema.parse(events);
@@ -26,18 +30,12 @@ const EventsPage = async () => {
 	const events = await getEvents();
 
 	return (
-		<main>
+		<>
 			<PageTitle>{t('title')}</PageTitle>
-			{events.length === 0 ? (
-				<p>{t('noEvents')}</p>
-			) : (
-				<ul>
-					{events.map((event) => (
-						<li key={event.id}>{event.name}</li>
-					))}
-				</ul>
-			)}
-		</main>
+			<Suspense fallback={<Loading />}>
+				<DataTable columns={eventsColumns} data={events} searchBy="name" />
+			</Suspense>
+		</>
 	);
 };
 
