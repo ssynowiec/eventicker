@@ -18,9 +18,9 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 	return (
 		<div className="relative flex h-full">
 			<Sidebar user={user} />
-			<main className="w-full">
+			<main className="flex w-full flex-col">
 				<DashboardTopBar />
-				<section className="p-4">{children}</section>
+				<section className="flex flex-1 flex-col p-4">{children}</section>
 			</main>
 		</div>
 	);
