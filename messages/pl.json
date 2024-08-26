@@ -55,6 +55,19 @@
 			}
 		}
 	},
+	"DataTable": {
+		"Pagination": {
+			"rowsPerPage": "Wierszy na stronę",
+			"of": "z",
+			"page": "Strona",
+			"goTo": "Przejdź do",
+			"firstPage": "Pierwsza strona",
+			"previousPage": "Poprzednia strona",
+			"nextPage": "Następna strona",
+			"lastPage": "Ostatnia strona",
+			"row(s)Selected": "wybrano wiersz(e)"
+		}
+	},
 	"Profile": {
 		"title": "Profil",
 		"myData": "Moje dane",
