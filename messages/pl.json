@@ -53,6 +53,15 @@
 				"fieldRequired": "jest wymagane",
 				"submit": "Dodaj wydarzenie"
 			}
+		},
+		"DeleteEventDialog": {
+			"deleteEvent": "Usuń wydarzenie",
+			"areYouSure": "Czy na pewno chcesz usunąć wydarzenie",
+			"thisActionCannotBeUndone": "Tej akcji nie można cofnąć. Spowoduje to trwałe usunięcie Twojego konta i usunięcie Twoich danych z naszych serwerów.",
+			"no": "Nie",
+			"yes": "Tak",
+			"successfullyDeleted": "Wydarzenie zostało pomyślnie usunięte",
+			"failedToDelete": "Nie udało się usunąć wydarzenia"
 		}
 	},
 	"DataTable": {

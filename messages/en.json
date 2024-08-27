@@ -53,6 +53,15 @@
 				"fieldRequired": "is required",
 				"submit": "Add event"
 			}
+		},
+		"DeleteEventDialog": {
+			"deleteEvent": "Delete event",
+			"areYouSure": "Are you sure you want to delete the event",
+			"thisActionCannotBeUndone": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+			"no": "No",
+			"yes": "Yes",
+			"successfullyDeleted": "Event successfully deleted",
+			"failedToDelete": "Failed to delete event"
 		}
 	},
 	"DataTable": {

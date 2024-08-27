@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const newEventSchema = insertEventSchema;
 
 const checkSlugAvailability = async (slug: string) => {
-	const res = await fetch(`/api/event/${slug}`, {
+	const res = await fetch(`/api/event?slug=${slug}`, {
 		method: 'GET',
 		credentials: 'include',
 	});
