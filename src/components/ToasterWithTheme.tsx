@@ -11,5 +11,5 @@ export const ToasterWithTheme = () => {
 			? theme
 			: undefined;
 
-	return <Toaster theme={validatedTheme} />;
+	return <Toaster theme={validatedTheme} richColors />;
 };
