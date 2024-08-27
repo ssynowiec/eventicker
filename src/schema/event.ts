@@ -1,11 +1,18 @@
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { pgEnum, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { userTable } from '@/schema/user';
+
+export const eventStatusEnum = pgEnum('event_status', [
+	'DRAFT',
+	'PUBLISHED',
+	'ARCHIVED',
+]);
 
 export const eventTable = pgTable('event', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull(),
 	slug: text('slug').notNull(),
+	status: eventStatusEnum('status').default('DRAFT').notNull(),
 	description: text('description'),
 	start_date: text('start_date').notNull(),
 	creator_id: text('creator_id')
