@@ -35,6 +35,7 @@ export const TextRichEditor = ({
 		onUpdate: ({ editor }) => {
 			onChange(editor.getHTML());
 		},
+		immediatelyRender: false,
 	});
 
 	return (
