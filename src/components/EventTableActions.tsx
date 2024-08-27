@@ -12,6 +12,8 @@ import Link from 'next/link';
 import { z } from 'zod';
 import { selectEventSchema } from '@/schema/event';
 import { DeleteEventDialog } from '@/components/DeleteEventDialog';
+import { useTranslations } from 'next-intl';
+import { publishEvent } from '@/lib/publishEvent';
 
 export type Event = z.infer<typeof selectEventSchema>;
 
@@ -20,6 +22,8 @@ interface EventTableActionsProps {
 }
 
 export const EventTableActions = ({ event }: EventTableActionsProps) => {
+	const t = useTranslations('Events.Actions');
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -29,11 +33,20 @@ export const EventTableActions = ({ event }: EventTableActionsProps) => {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuLabel>Actions</DropdownMenuLabel>
+				<DropdownMenuLabel>{t('title')}</DropdownMenuLabel>
+				{event.status === 'DRAFT' && (
+					<DropdownMenuItem
+						onClick={async () => await publishEvent(event)}
+						className="cursor-pointer text-green-500"
+					>
+						🚀 {t('publish')}
+					</DropdownMenuItem>
+				)}
+
 				<DropdownMenuItem
 					onClick={() => navigator.clipboard.writeText(event.id.toString())}
 				>
-					Copy event ID
+					{t('copyId')}
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
@@ -42,7 +55,7 @@ export const EventTableActions = ({ event }: EventTableActionsProps) => {
 						className="flex cursor-pointer items-center gap-1"
 					>
 						<ExternalLink className="h-4 w-4" />
-						View event page
+						{t('view')}
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
