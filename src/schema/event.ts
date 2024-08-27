@@ -1,6 +1,7 @@
 import { pgEnum, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { userTable } from '@/schema/user';
+import { z } from 'zod';
 
 export const eventStatusEnum = pgEnum('event_status', [
 	'DRAFT',
@@ -31,3 +32,4 @@ export const eventTable = pgTable('event', {
 export const selectEventsSchema = createSelectSchema(eventTable).array();
 export const selectEventSchema = createSelectSchema(eventTable);
 export const insertEventSchema = createInsertSchema(eventTable);
+export const eventStatusEnumSchema = z.enum(eventStatusEnum.enumValues);

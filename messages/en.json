@@ -54,6 +54,11 @@
 				"submit": "Add event"
 			}
 		},
+		"Status": {
+			"published": "Published",
+			"draft": "Draft",
+			"archived": "Archived"
+		},
 		"DeleteEventDialog": {
 			"deleteEvent": "Delete event",
 			"areYouSure": "Are you sure you want to delete the event",

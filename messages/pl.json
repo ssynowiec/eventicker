@@ -54,6 +54,11 @@
 				"submit": "Dodaj wydarzenie"
 			}
 		},
+		"Status": {
+			"published": "Opublikowane",
+			"draft": "Szkic",
+			"archived": "Zarchiwizowane"
+		},
 		"DeleteEventDialog": {
 			"deleteEvent": "Usuń wydarzenie",
 			"areYouSure": "Czy na pewno chcesz usunąć wydarzenie",
