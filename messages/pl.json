@@ -65,6 +65,7 @@
 		}
 	},
 	"DataTable": {
+		"search": "Szukaj",
 		"Pagination": {
 			"rowsPerPage": "Wierszy na stronę",
 			"of": "z",

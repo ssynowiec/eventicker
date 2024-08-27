@@ -65,6 +65,7 @@
 		}
 	},
 	"DataTable": {
+		"search": "Search",
 		"Pagination": {
 			"rowsPerPage": "Rows per page",
 			"of": "of",
