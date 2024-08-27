@@ -43,7 +43,7 @@ export const eventsColumns: ColumnDef<Event>[] = [
 			<DataTableColumnHeader column={column} title="Event name" />
 		),
 		cell: ({ row }) => (
-			<Link href={row.original.slug}>{row.getValue('name')}</Link>
+			<Link href={`events/${row.original.slug}`}>{row.getValue('name')}</Link>
 		),
 	},
 	{
