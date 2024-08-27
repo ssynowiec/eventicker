@@ -3,18 +3,18 @@ import { db } from '@/lib/auth/db';
 import { eventTable } from '@/schema/event';
 import { eq } from 'drizzle-orm';
 
-interface GetEventBySlugParams {
-	slug: string;
+interface EventIdParams {
+	id: string;
 }
 
 export const GET = async (
 	req: NextRequest,
-	context: { params: GetEventBySlugParams },
+	context: { params: EventIdParams },
 ) => {
 	const events = await db
 		.select()
 		.from(eventTable)
-		.where(eq(eventTable.slug, context.params.slug));
+		.where(eq(eventTable.id, Number(context.params.id)));
 
 	if (events.length === 0) {
 		return new Response('Not found', {
@@ -27,17 +27,26 @@ export const GET = async (
 	});
 };
 
-interface DeleteEventByIdParams {
-	id: string;
-}
-
 export const DELETE = async (
 	req: NextRequest,
-	context: { params: DeleteEventByIdParams },
+	context: { params: EventIdParams },
 ) => {
-	const id = context.params.id;
+	const id = Number(context.params.id);
 
-	console.log('Deleting event with ID:', id);
+	try {
+		const deletedEvent = await db
+			.delete(eventTable)
+			.where(eq(eventTable.id, id))
+			.returning();
 
-	return new Response(`Deleting event with ID: ${id}`);
+		if (deletedEvent) {
+			return new Response('Successfully deleted event', {
+				status: 200,
+			});
+		}
+	} catch (e) {
+		return new Response('Something went wrong', {
+			status: 500,
+		});
+	}
 };
