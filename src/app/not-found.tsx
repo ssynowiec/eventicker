@@ -15,7 +15,7 @@ const NotFoundPage = async () => {
 				<div className="flex gap-4">
 					<GoBackButton />
 					<Link href="/" className={buttonVariants()}>
-						Back to Home
+						{t('backToHome')}
 					</Link>
 				</div>
 			</div>

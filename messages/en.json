@@ -94,6 +94,8 @@
 	},
 	"NotFound": {
 		"title": "Oops! Page not found",
-		"message": "It seems like the page you're looking for \ndoes not exist or might have been removed."
-	}
+		"message": "It seems like the page you're looking for \ndoes not exist or might have been removed.",
+		"backToHome": "Back to homepage"
+	},
+	"goBack": "Go back"
 }

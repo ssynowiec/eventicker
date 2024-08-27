@@ -94,6 +94,8 @@
 	},
 	"NotFound": {
 		"title": "Oops! Strona nie znaleziona",
-		"message": "Wygląda na to, że strona, której szukasz \nnie istnieje lub została usunięta."
-	}
+		"message": "Wygląda na to, że strona, której szukasz \nnie istnieje lub została usunięta.",
+		"backToHome": "Powrót do strony głównej"
+	},
+	"goBack": "Powrót"
 }
