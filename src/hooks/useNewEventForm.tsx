@@ -3,21 +3,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { insertEventSchema } from '@/schema/event';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { checkSlugAvailability } from '@/lib/checkSlugAvailability';
+import { createNewEvent } from '@/lib/createNewEvent';
 
 const newEventSchema = insertEventSchema;
-
-const checkSlugAvailability = async (slug: string) => {
-	const res = await fetch(`/api/event?slug=${slug}`, {
-		method: 'GET',
-		credentials: 'include',
-	});
-
-	if (res.status === 404) {
-		return true;
-	} else {
-		throw new Error('Slug is not available');
-	}
-};
 
 export const useNewEventForm = () => {
 	const t = useTranslations('Events.NewEvent.Form');
@@ -34,12 +23,24 @@ export const useNewEventForm = () => {
 	});
 
 	const onSubmit = form.handleSubmit(async (data) => {
-		if (!(await checkSlugAvailability(data.slug))) {
+		try {
+			if (data.slug === '') {
+				new Error('Slug is required');
+			} else {
+				await checkSlugAvailability(data.slug);
+			}
+		} catch (error) {
 			form.setError('slug', {
 				type: 'unavailable',
 				message: `${t('unavailableSlug')}`,
 			});
 		}
+		// if (!(await checkSlugAvailability(data.slug))) {
+		// 	form.setError('slug', {
+		// 		type: 'unavailable',
+		// 		message: `${t('unavailableSlug')}`,
+		// 	});
+		// }
 
 		if (data.name === '') {
 			form.setError('name', {
@@ -85,19 +86,19 @@ export const useNewEventForm = () => {
 			});
 		}
 
-		console.log(form.formState.isValid);
+		console.log('check 1');
 
-		// const res = await fetch('/api/event', {
-		// 	method: 'POST',
-		// 	credentials: 'include',
-		//
-		// 	headers: {
-		// 		// Cookie: `session_id=${session_id}`,
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify(data),
-		// });
-		// console.log(data);
+		console.log('form.formState.isValid value', form.formState.isValid);
+
+		if (form.formState.isValid) {
+			return;
+		}
+
+		console.log('check 2');
+
+		await createNewEvent(data);
+
+		// console.log(form.formState.isValid);
 	});
 
 	return { form, onSubmit, checkSlugAvailability };
