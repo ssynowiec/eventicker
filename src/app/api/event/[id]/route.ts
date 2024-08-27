@@ -26,3 +26,18 @@ export const GET = async (
 		status: 200,
 	});
 };
+
+interface DeleteEventByIdParams {
+	id: string;
+}
+
+export const DELETE = async (
+	req: NextRequest,
+	context: { params: DeleteEventByIdParams },
+) => {
+	const id = context.params.id;
+
+	console.log('Deleting event with ID:', id);
+
+	return new Response(`Deleting event with ID: ${id}`);
+};
