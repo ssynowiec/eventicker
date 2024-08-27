@@ -32,7 +32,7 @@ const getEventBySlug = async (slug: string) => {
 const EventPage = async ({ params: { slug } }: EventPageProps) => {
 	const event = await getEventBySlug(slug);
 
-	if (!event) {
+	if (!event || event.status !== 'PUBLISHED') {
 		return notFound();
 	}
 
