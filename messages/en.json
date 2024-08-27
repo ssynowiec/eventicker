@@ -67,6 +67,12 @@
 			"yes": "Yes",
 			"successfullyDeleted": "Event successfully deleted",
 			"failedToDelete": "Failed to delete event"
+		},
+		"Actions": {
+			"title": "Actions",
+			"publish": "Publish event",
+			"copyId": "Copy event ID",
+			"view": "View event page"
 		}
 	},
 	"DataTable": {

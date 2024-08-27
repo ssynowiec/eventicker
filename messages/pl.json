@@ -67,6 +67,12 @@
 			"yes": "Tak",
 			"successfullyDeleted": "Wydarzenie zostało pomyślnie usunięte",
 			"failedToDelete": "Nie udało się usunąć wydarzenia"
+		},
+		"Actions": {
+			"title": "Akcje",
+			"publish": "Opublikuj wydarzenie",
+			"copyId": "Skopiuj ID wydarzenia",
+			"view": "Zobacz stronę wydarzenia"
 		}
 	},
 	"DataTable": {
