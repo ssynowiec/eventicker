@@ -37,7 +37,10 @@ export const EventTableActions = ({ event }: EventTableActionsProps) => {
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
-					<Link href="#" className="flex cursor-pointer items-center gap-1">
+					<Link
+						href={`/event/${event.slug}`}
+						className="flex cursor-pointer items-center gap-1"
+					>
 						<ExternalLink className="h-4 w-4" />
 						View event page
 					</Link>
