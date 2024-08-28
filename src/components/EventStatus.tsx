@@ -3,11 +3,11 @@ import { z } from 'zod';
 import { eventStatusEnumSchema } from '@/schema/event';
 import { useTranslations } from 'next-intl';
 
-interface EventTableStatusProps {
+interface EventStatusProps {
 	status: z.infer<typeof eventStatusEnumSchema>;
 }
 
-export const EventTableStatus = ({ status }: EventTableStatusProps) => {
+export const EventStatus = ({ status }: EventStatusProps) => {
 	const t = useTranslations('Events.Status');
 
 	switch (status) {
