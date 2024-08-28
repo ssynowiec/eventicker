@@ -9,7 +9,7 @@ interface EventPageProps {
 
 const getEventBySlug = async (slug: string) => {
 	try {
-		const res = await fetch(`${env.API_URL}/event?slug=${slug}`, {
+		const res = await fetch(`${env.API_URL}/events?slug=${slug}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

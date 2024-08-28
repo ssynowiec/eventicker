@@ -4,7 +4,7 @@ import { env } from '@/env';
 
 export const checkSlugAvailability = async (slug: string) => {
 	console.log('Checking slug availability:', slug);
-	const res = await fetch(`${env.API_URL}/event?slug=${slug}`, {
+	const res = await fetch(`${env.API_URL}/events?slug=${slug}`, {
 		method: 'GET',
 		credentials: 'include',
 	});

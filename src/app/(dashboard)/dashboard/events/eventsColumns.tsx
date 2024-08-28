@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { FormatedDateAndTimeToLocalString } from '@/components/FormatedDateAndTimeToLocalString';
 import Link from 'next/link';
 import { EventTableActions } from '@/components/EventTableActions';
-import { EventTableStatus } from '@/components/EventTableStatus';
+import { EventStatus } from '@/components/EventStatus';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -66,7 +66,7 @@ export const eventsColumns: ColumnDef<Event>[] = [
 		),
 		cell: ({ row }) => {
 			const event = row.original;
-			return <EventTableStatus status={event.status} />;
+			return <EventStatus status={event.status} />;
 		},
 	},
 	{

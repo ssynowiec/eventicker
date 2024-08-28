@@ -8,7 +8,7 @@ import { cookies } from 'next/headers';
 type NewEvent = z.infer<typeof insertEventSchema>;
 
 export const createNewEvent = async (data: NewEvent) => {
-	const res = await fetch(`${env.API_URL}/event`, {
+	const res = await fetch(`${env.API_URL}/events`, {
 		method: 'POST',
 		credentials: 'include',
 		headers: {

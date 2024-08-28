@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { CalendarDays, CreditCard, Users } from 'lucide-react';
 
 const getAllEvents = async () => {
-	const eventsRes = await fetch(`${env.API_URL}/event`, {
+	const eventsRes = await fetch(`${env.API_URL}/events`, {
 		method: 'GET',
 		credentials: 'include',
 		headers: {

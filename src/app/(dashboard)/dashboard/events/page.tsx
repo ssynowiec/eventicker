@@ -11,7 +11,7 @@ import { selectEventsSchema } from '@/schema/event';
 const getEvents = async () => {
 	const session_id = cookies().get('auth_session')?.value;
 
-	const eventsRes = await fetch(`${env.API_URL}/event`, {
+	const eventsRes = await fetch(`${env.API_URL}/events`, {
 		method: 'GET',
 		credentials: 'include',
 		headers: {
