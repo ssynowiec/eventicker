@@ -7,13 +7,22 @@ import { User } from 'lucia';
 import { SidebarUserMenu } from '@/components/sidebar/SidebarUserMenu';
 import { SidebarHeader } from '@/components/sidebar/SidebarHeader';
 import { SidebarHide } from '@/components/sidebar/SidebarHide';
+import { SidebarNavLink } from '@/types/SidebarNavLink';
+import { usePathname } from 'next/navigation';
 
 interface SidebarProps {
 	user: User;
+	mainNav: SidebarNavLink[];
+	eventsNav: SidebarNavLink[];
 }
 
-export const Sidebar = ({ user }: SidebarProps) => {
+export const Sidebar = ({ user, mainNav, eventsNav }: SidebarProps) => {
 	const [isCollapsed, setIsCollapsed] = useSidebarIsCollapsed();
+	const pathname = usePathname();
+
+	const navLinks = pathname.startsWith('/dashboard/events/')
+		? eventsNav
+		: mainNav;
 
 	return (
 		<aside
@@ -23,7 +32,7 @@ export const Sidebar = ({ user }: SidebarProps) => {
 			)}
 		>
 			<SidebarHeader isCollapsed={isCollapsed} />
-			<SidebarNav isCollapsed={isCollapsed} />
+			<SidebarNav isCollapsed={isCollapsed} navLinks={navLinks} />
 			<SidebarHide isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
 			<SidebarUserMenu isCollapsed={isCollapsed} user={user} />
 		</aside>

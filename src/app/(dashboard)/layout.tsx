@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
 import { validateRequest } from '@/lib/auth/validateRequests';
 import { redirect } from 'next/navigation';
-import { Sidebar } from '@/components/sidebar/Sidebar';
-import { DashboardTopBar } from '@/components/DashboardTopBar';
+import { CalendarDays, LayoutDashboard, Settings } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
+import { DashboardLayout as DashboardLayoutRoot } from '@/components/DashboardLayout';
 
 interface DashboardLayoutProps {
 	children: ReactNode;
@@ -10,19 +11,46 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 	const { user } = await validateRequest();
+	const t = await getTranslations('Dashboard.Sidebar.Menu');
 
 	if (!user) {
 		return redirect('/login');
 	}
 
+	const MAIN_NAV_LINKS = [
+		{
+			href: '/dashboard',
+			name: 'dashboard',
+			icon: <LayoutDashboard />,
+			children: t('dashboard'),
+		},
+		{
+			href: '/dashboard/events',
+			name: 'events',
+			icon: <CalendarDays />,
+			children: t('events'),
+		},
+		{
+			href: '/settings',
+			name: 'settings',
+			icon: <Settings />,
+			children: t('settings'),
+		},
+	];
+
+	const EVENTS_NAV_LINKS = [
+		{
+			href: '/dashboard/events',
+			name: 'events',
+			icon: <CalendarDays />,
+			children: t('events'),
+		},
+	];
+
 	return (
-		<div className="relative flex h-full">
-			<Sidebar user={user} />
-			<main className="flex w-full flex-col">
-				<DashboardTopBar />
-				<section className="flex flex-1 flex-col p-4">{children}</section>
-			</main>
-		</div>
+		<DashboardLayoutRoot mainNav={MAIN_NAV_LINKS} eventsNav={EVENTS_NAV_LINKS}>
+			{children}
+		</DashboardLayoutRoot>
 	);
 };
 

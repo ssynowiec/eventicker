@@ -1,38 +1,15 @@
-import { CalendarDays, LayoutDashboard, Settings } from 'lucide-react';
 import { SidebarNavIcon } from '@/components/sidebar/SidebarNavIcon';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { SidebarNavLink } from '@/components/sidebar/SidebarNavLink';
 import type { ReactNode } from 'react';
-import { useTranslations } from 'next-intl';
+import { SidebarNavLink as SidebarNavLinkType } from '@/types/SidebarNavLink';
+import { SidebarNavLink } from '@/components/sidebar/SidebarNavLink';
 
 interface SidebarNavProps {
 	isCollapsed: boolean;
+	navLinks: SidebarNavLinkType[];
 }
 
-export const SidebarNav = ({ isCollapsed }: SidebarNavProps) => {
-	const t = useTranslations('Dashboard.Sidebar.Menu');
-
-	const NAV_LINKS = [
-		{
-			href: '/dashboard',
-			name: 'dashboard',
-			icon: <LayoutDashboard />,
-			children: t('dashboard'),
-		},
-		{
-			href: '/dashboard/events',
-			name: 'events',
-			icon: <CalendarDays />,
-			children: t('events'),
-		},
-		{
-			href: '/settings',
-			name: 'settings',
-			icon: <Settings />,
-			children: t('settings'),
-		},
-	];
-
+export const SidebarNav = ({ isCollapsed, navLinks }: SidebarNavProps) => {
 	const renderSidebarNavLinkAndIcon = (
 		href: string,
 		icon: string | ReactNode,
@@ -57,7 +34,7 @@ export const SidebarNav = ({ isCollapsed }: SidebarNavProps) => {
 		<TooltipProvider delayDuration={0}>
 			<nav className="flex-1">
 				<ul className="flex flex-col gap-1">
-					{NAV_LINKS.map(({ href, icon, children }) =>
+					{navLinks.map(({ href, icon, children }) =>
 						renderSidebarNavLinkAndIcon(href, icon, children),
 					)}
 				</ul>
