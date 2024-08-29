@@ -29,6 +29,13 @@
       "when": 1724775578663,
       "tag": "0003_add_event_status",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1724950109161,
+      "tag": "0004_add_event_thum",
+      "breakpoints": true
     }
   ]
 }

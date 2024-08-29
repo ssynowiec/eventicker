@@ -13,6 +13,8 @@ export const eventTable = pgTable('event', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull(),
 	slug: text('slug').notNull(),
+	thumbnail: text('thumbnail'),
+	location: text('location'),
 	status: eventStatusEnum('status').default('DRAFT').notNull(),
 	description: text('description'),
 	start_date: text('start_date').notNull(),
