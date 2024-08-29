@@ -9,13 +9,11 @@ import { eventsColumns } from '@/app/(dashboard)/dashboard/events/eventsColumns'
 import { selectEventsSchema } from '@/schema/event';
 
 const getEvents = async () => {
-	const session_id = cookies().get('auth_session')?.value;
-
-	const eventsRes = await fetch(`${env.API_URL}/events`, {
+	const eventsRes = await fetch(`${env.API_URL}/events?context=admin`, {
 		method: 'GET',
 		credentials: 'include',
 		headers: {
-			Cookie: `session_id=${session_id}`,
+			Cookie: cookies().toString(),
 		},
 	});
 

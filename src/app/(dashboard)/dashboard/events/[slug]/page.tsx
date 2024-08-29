@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { EventStatus } from '@/components/EventStatus';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
+import { cookies } from 'next/headers';
 
 interface EventAdminPageProps {
 	params: { slug: string };
@@ -12,8 +13,10 @@ interface EventAdminPageProps {
 const getEventBySlug = async (slug: string) => {
 	const res = await fetch(`${env.API_URL}/events?slug=${slug}`, {
 		method: 'GET',
+		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/json',
+			Cookie: cookies().toString(),
 		},
 	});
 	return selectEventSchema.parse(await res.json());

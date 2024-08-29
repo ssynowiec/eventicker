@@ -1,7 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { db } from '@/lib/auth/db';
 import { eventTable } from '@/schema/event';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
+import { lucia } from '@/lib/auth/auth';
 
 interface EventIdParams {
 	id: string;
@@ -11,10 +12,49 @@ export const GET = async (
 	req: NextRequest,
 	context: { params: EventIdParams },
 ) => {
+	if (req.cookies.get('auth_session')?.value) {
+		const { user } = await lucia.validateSession(
+			req.cookies.get('auth_session')?.value ?? '',
+		);
+
+		if (!user) {
+			return new Response('Unauthorized', {
+				status: 401,
+			});
+		}
+
+		console.log('user', user);
+
+		const events = await db
+			.select()
+			.from(eventTable)
+			.where(
+				and(
+					eq(eventTable.id, Number(context.params.id)),
+					eq(eventTable.creator_id, user.id),
+				),
+			);
+
+		if (events.length === 0) {
+			return new Response('Not found', {
+				status: 404,
+			});
+		}
+
+		return new Response(JSON.stringify(events[0]), {
+			status: 200,
+		});
+	}
+
 	const events = await db
 		.select()
 		.from(eventTable)
-		.where(eq(eventTable.id, Number(context.params.id)));
+		.where(
+			and(
+				eq(eventTable.id, Number(context.params.id)),
+				eq(eventTable.status, 'PUBLISHED'),
+			),
+		);
 
 	if (events.length === 0) {
 		return new Response('Not found', {

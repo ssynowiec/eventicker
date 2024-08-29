@@ -3,16 +3,43 @@ import { eventTable, insertEventSchema } from '@/schema/event';
 import { NextRequest } from 'next/server';
 import { lucia } from '@/lib/auth/auth';
 import { ZodError } from 'zod';
-import { eq } from 'drizzle-orm';
+import { and, eq, or } from 'drizzle-orm';
 
 export const GET = async (req: NextRequest) => {
-	if (req.nextUrl.searchParams.get('slug')) {
-		const slug = req.nextUrl.searchParams.get('slug') ?? '';
+	const slug = req.nextUrl.searchParams.get('slug') ?? '';
+	const context = req.nextUrl.searchParams.get('context') ?? 'public';
+	const authSession = req.cookies.get('auth_session')?.value ?? '';
+	let user = null;
 
-		const events = await db
-			.select()
-			.from(eventTable)
-			.where(eq(eventTable.slug, slug));
+	if (authSession) {
+		const session = await lucia.validateSession(authSession);
+		user = session?.user ?? null;
+	}
+
+	if (slug) {
+		let events;
+
+		if (user) {
+			events = await db
+				.select()
+				.from(eventTable)
+				.where(
+					and(
+						eq(eventTable.slug, slug),
+						or(
+							eq(eventTable.creator_id, user.id),
+							eq(eventTable.status, 'PUBLISHED'),
+						),
+					),
+				);
+		} else {
+			events = await db
+				.select()
+				.from(eventTable)
+				.where(
+					and(eq(eventTable.slug, slug), eq(eventTable.status, 'PUBLISHED')),
+				);
+		}
 
 		if (events.length === 0) {
 			return new Response('Not found', {
@@ -25,21 +52,20 @@ export const GET = async (req: NextRequest) => {
 		});
 	}
 
-	if (req.cookies.get('session_id')?.value) {
-		const { user } = await lucia.validateSession(
-			req.cookies.get('session_id')?.value ?? '',
-		);
+	if (user) {
+		let events;
 
-		if (!user) {
-			return new Response('Unauthorized', {
-				status: 401,
-			});
+		if (context === 'admin') {
+			events = await db
+				.select()
+				.from(eventTable)
+				.where(eq(eventTable.creator_id, user.id));
+		} else {
+			events = await db
+				.select()
+				.from(eventTable)
+				.where(eq(eventTable.status, 'PUBLISHED'));
 		}
-
-		const events = await db
-			.select()
-			.from(eventTable)
-			.where(eq(eventTable.creator_id, user.id));
 
 		return new Response(JSON.stringify(events), {
 			headers: {
@@ -48,7 +74,17 @@ export const GET = async (req: NextRequest) => {
 		});
 	}
 
-	const events = await db.select().from(eventTable);
+	const events = await db
+		.select()
+		.from(eventTable)
+		.where(eq(eventTable.status, 'PUBLISHED'));
+
+	if (events.length === 0) {
+		return new Response('Not found', {
+			status: 404,
+		});
+	}
+
 	return new Response(JSON.stringify(events), {
 		headers: {
 			'Content-Type': 'application/json',
