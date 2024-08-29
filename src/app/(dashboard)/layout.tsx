@@ -1,7 +1,12 @@
 import { ReactNode } from 'react';
 import { validateRequest } from '@/lib/auth/validateRequests';
 import { redirect } from 'next/navigation';
-import { CalendarDays, LayoutDashboard, Settings } from 'lucide-react';
+import {
+	ArrowLeft,
+	CalendarDays,
+	LayoutDashboard,
+	Settings,
+} from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { DashboardLayout as DashboardLayoutRoot } from '@/components/DashboardLayout';
 
@@ -41,9 +46,9 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 	const EVENTS_NAV_LINKS = [
 		{
 			href: '/dashboard/events',
-			name: 'events',
-			icon: <CalendarDays />,
-			children: t('events'),
+			name: 'back',
+			icon: <ArrowLeft />,
+			children: t('back'),
 		},
 	];
 

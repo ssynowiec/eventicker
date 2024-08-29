@@ -15,6 +15,7 @@
 			"hide": "Ukryj sidebar",
 			"show": "Pokaż sidebar",
 			"Menu": {
+				"back": "Powrót",
 				"dashboard": "Pulpit",
 				"settings": "Ustawienia",
 				"User": {

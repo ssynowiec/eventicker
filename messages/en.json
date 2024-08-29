@@ -15,6 +15,7 @@
 			"hide": "Hide sidebar",
 			"show": "Show sidebar",
 			"Menu": {
+				"back": "Back",
 				"dashboard": "Dashboard",
 				"settings": "Settings",
 				"User": {
