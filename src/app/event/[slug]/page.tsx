@@ -3,6 +3,8 @@ import { selectEventSchema } from '@/schema/event';
 import parse from 'html-react-parser';
 import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import Image from 'next/image';
 
 interface EventPageProps {
 	params: { slug: string };
@@ -42,16 +44,23 @@ const EventPage = async ({ params: { slug } }: EventPageProps) => {
 	}
 
 	return (
-		<>
-			<h1>{event.name}</h1>
+		<main>
+			<section className="mx-auto flex max-w-5xl flex-col gap-2 py-4">
+				<AspectRatio ratio={16 / 9}>
+					<Image
+						src=""
+						alt={`${event.name} thumbnail`}
+						className="rounded-md object-cover"
+						width={1600}
+						height={900}
+					/>
+				</AspectRatio>
 
-			{event.description && (
-				<div>
-					<p>Description</p>
-					{parse(event.description)}
-				</div>
-			)}
-		</>
+				<h1 className="text-2xl font-bold">{event.name}</h1>
+
+				{event.description && <div>{parse(event.description)}</div>}
+			</section>
+		</main>
 	);
 };
 
