@@ -42,6 +42,7 @@
 		"@tiptap/react": "2.6.6",
 		"@tiptap/starter-kit": "^2.6.6",
 		"arctic": "^1.9.2",
+		"babel-plugin-react-compiler": "0.0.0-experimental-e68eda9-20240829",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
 		"cmdk": "1.0.0",
