@@ -10,6 +10,7 @@ export const env = createEnv({
 		API_URL: z.string(),
 		CLOUDINARY_API_KEY: z.string(),
 		CLOUDINARY_API_SECRET: z.string(),
+		RESEND_API_KEY: z.string(),
 	},
 	client: {
 		NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
