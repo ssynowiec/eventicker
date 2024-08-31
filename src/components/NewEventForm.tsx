@@ -83,6 +83,46 @@ export const NewEventForm = () => {
 				/>
 				<FormField
 					control={form.control}
+					name="location"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>
+								{t('eventLocation')}
+								<RequiredField />
+							</FormLabel>
+							<FormControl>
+								<Input
+									placeholder={t('eventLocationPlaceholder')}
+									{...field}
+									value={field.value}
+								/>
+							</FormControl>
+							<FormDescription>{t('eventLocationDescription')}</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="thumbnail"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>
+								{t('eventThumbnail')}
+								<RequiredField />
+							</FormLabel>
+							<FormControl>
+								<Input {...field} type="file" />
+							</FormControl>
+							<FormDescription>
+								{t('eventThumbnailDescription')}
+							</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
 					name="description"
 					render={({ field }) => (
 						<FormItem>

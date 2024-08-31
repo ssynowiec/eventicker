@@ -16,6 +16,8 @@ export const useNewEventForm = () => {
 		defaultValues: {
 			name: '',
 			slug: '',
+			location: '',
+			thumbnail: '',
 			description: '',
 			start_date: '',
 			creator_id: '',
