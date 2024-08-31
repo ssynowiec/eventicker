@@ -10,6 +10,16 @@ jiti('./src/env');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'res.cloudinary.com',
+				port: '',
+				pathname: '/eventicker/image/upload/**',
+			},
+		],
+	},
 	reactStrictMode: true,
 	experimental: {
 		reactCompiler: true,
