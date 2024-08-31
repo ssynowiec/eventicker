@@ -35,6 +35,7 @@ import _ from 'lodash';
 import { SlugInput } from '@/components/SlugInput';
 import { useNewEventForm } from '@/hooks/useNewEventForm';
 import { TextRichEditor } from '@/components/TextRichEditor';
+import { ImageUpload } from '@/components/ImageUpload';
 
 const dateLocaleMapping: { [key: string]: Locale } = {
 	pl: pl,
@@ -102,25 +103,8 @@ export const NewEventForm = () => {
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={form.control}
-					name="thumbnail"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>
-								{t('eventThumbnail')}
-								<RequiredField />
-							</FormLabel>
-							<FormControl>
-								<Input {...field} type="file" />
-							</FormControl>
-							<FormDescription>
-								{t('eventThumbnailDescription')}
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+				<ImageUpload form={form} name="thumbnail" />
+
 				<FormField
 					control={form.control}
 					name="description"
