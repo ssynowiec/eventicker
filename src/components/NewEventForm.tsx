@@ -95,7 +95,7 @@ export const NewEventForm = () => {
 								<Input
 									placeholder={t('eventLocationPlaceholder')}
 									{...field}
-									value={field.value}
+									value={field.value ?? ''}
 								/>
 							</FormControl>
 							<FormDescription>{t('eventLocationDescription')}</FormDescription>
