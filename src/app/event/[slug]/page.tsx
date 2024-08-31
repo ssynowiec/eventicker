@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 
 interface EventPageProps {
 	params: { slug: string };
@@ -37,22 +39,27 @@ const getEventBySlug = async (slug: string) => {
 const EventPage = async ({ params: { slug } }: EventPageProps) => {
 	const event = await getEventBySlug(slug);
 
-	console.log(event);
-
 	if (!event) {
 		return notFound();
 	}
 
 	return (
-		<main>
-			<section className="mx-auto flex max-w-5xl flex-col gap-2 py-4">
+		<main className="min-h-svh">
+			<section className="mx-3 flex h-full max-w-5xl flex-col gap-2 py-2 md:mx-auto">
+				<Link
+					href="/"
+					className="flex items-center gap-1 underline-offset-4 hover:underline"
+				>
+					<ArrowLeft className="h-4 w-4" /> Back to events
+				</Link>
 				<AspectRatio ratio={16 / 9}>
 					<Image
-						src=""
+						src={event.thumbnail ?? ''}
 						alt={`${event.name} thumbnail`}
-						className="rounded-md object-cover"
+						className="h-full w-full rounded-md object-cover"
 						width={1600}
 						height={900}
+						priority={true}
 					/>
 				</AspectRatio>
 
