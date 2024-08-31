@@ -1,4 +1,8 @@
-import { CldUploadWidget } from 'next-cloudinary';
+import {
+	CldUploadWidget,
+	CloudinaryUploadWidgetInfo,
+	CloudinaryUploadWidgetResults,
+} from 'next-cloudinary';
 import { Button } from '@/components/ui/button';
 import { FieldPath, FieldValues, UseFormReturn } from 'react-hook-form';
 import {
@@ -99,10 +103,10 @@ export const ImageUpload = <T extends FieldValues>({
 									},
 								}}
 								onSuccess={(result, { widget }) => {
-									field.onChange(result?.info?.secure_url);
-									setFileName(
-										`${result?.info?.original_filename}.${result.info.format}`,
-									);
+									const res = result as CloudinaryUploadWidgetResults;
+									const info = res.info as CloudinaryUploadWidgetInfo;
+									field.onChange(info.secure_url);
+									setFileName(`${info.original_filename}.${info.format}`);
 								}}
 							>
 								{({ open }) => {
