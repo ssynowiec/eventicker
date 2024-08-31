@@ -17,7 +17,10 @@ export const useNewEventForm = () => {
 			name: '',
 			slug: '',
 			location: '',
-			thumbnail: '',
+			thumbnail:
+				process.env.NODE_ENV === 'development'
+					? 'https://res.cloudinary.com/eventicker/image/upload/v1725110305/dv0zhj5efjvsbyijhm6y.jpg'
+					: '',
 			description: '',
 			start_date: '',
 			creator_id: '',
