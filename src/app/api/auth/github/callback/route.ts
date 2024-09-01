@@ -7,6 +7,7 @@ import { db } from '@/lib/auth/db';
 import { eq } from 'drizzle-orm';
 import { userTable } from '@/schema/user';
 import WelcomeEmail from '@/components/emails/welcome';
+import { resend } from '@/lib/resend';
 
 export const GET = async (request: Request): Promise<Response> => {
 	const url = new URL(request.url);
