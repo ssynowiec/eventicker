@@ -6,6 +6,7 @@ import { lucia } from '@/lib/auth/auth';
 import { db } from '@/lib/auth/db';
 import { eq } from 'drizzle-orm';
 import { userTable } from '@/schema/user';
+import WelcomeEmail from '@/components/emails/welcome';
 
 export const GET = async (request: Request): Promise<Response> => {
 	const url = new URL(request.url);
@@ -58,6 +59,23 @@ export const GET = async (request: Request): Promise<Response> => {
 			avatar: githubUser.avatar_url,
 			github_id: githubUser.id,
 		});
+
+		try {
+			const { data, error } = await resend.emails.send({
+				from: 'Eventicker <contact@eventicker.ssynowiec.dev>',
+				to: [githubUser.email],
+				subject: 'Welcome to Eventicker! 🎉',
+				react: WelcomeEmail({ firstName: githubUser.name }),
+			});
+
+			if (error) {
+				return Response.json({ error }, { status: 500 });
+			}
+
+			return Response.json(data);
+		} catch (error) {
+			return Response.json({ error }, { status: 500 });
+		}
 
 		const session = await lucia.createSession(userId, {});
 		const sessionCookie = lucia.createSessionCookie(session.id);
