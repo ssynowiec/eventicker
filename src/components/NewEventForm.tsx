@@ -178,7 +178,6 @@ export const NewEventForm = () => {
 													}
 												}}
 												disabled={(date) => date < subDays(new Date(), 1)}
-												initialFocus
 											/>
 										</PopoverContent>
 									</Popover>
