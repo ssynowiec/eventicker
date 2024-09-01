@@ -1,4 +1,4 @@
-import EmailTemplate from '@/components/emails/email-template';
+import EmailTemplate from '@/components/email/email-template';
 import { resend } from '@/lib/resend';
 
 export const POST = async () => {
