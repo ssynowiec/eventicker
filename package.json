@@ -79,7 +79,7 @@
 		"next-themes": "^0.3.0",
 		"nuqs": "^1.18.0",
 		"react": "19.0.0-rc-e56f4ae3-20240830",
-		"react-day-picker": "9.0.8",
+		"react-day-picker": "8.10.1",
 		"react-dom": "19.0.0-rc-e56f4ae3-20240830",
 		"react-hook-form": "^7.53.0",
 		"react-resizable-panels": "^2.1.2",
