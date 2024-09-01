@@ -66,7 +66,7 @@ export const GET = async (request: Request): Promise<Response> => {
 				from: 'Eventicker <contact@eventicker.ssynowiec.dev>',
 				to: [githubUser.email],
 				subject: 'Welcome to Eventicker! 🎉',
-				react: WelcomeEmail({ firstName: githubUser.name }),
+				react: WelcomeEmail({ name: githubUser.name }),
 			});
 
 			if (error) {
