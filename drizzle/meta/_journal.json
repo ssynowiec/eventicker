@@ -36,6 +36,13 @@
       "when": 1724950109161,
       "tag": "0004_add_event_thum",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1725283500347,
+      "tag": "0005_add_event_privacy_policies",
+      "breakpoints": true
     }
   ]
 }
