@@ -6,7 +6,13 @@ import { cookies } from 'next/headers';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ClockIcon, MapPinIcon } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { buttonVariants } from '@/components/ui/button';
+import { format, getHours, intlFormat, Locale } from 'date-fns';
+import { enUS, pl } from 'date-fns/locale';
+import { useLocale } from 'next-intl';
+import { EventDateCard } from '@/components/EventDateCard';
 
 interface EventPageProps {
 	params: { slug: string };
@@ -36,8 +42,24 @@ const getEventBySlug = async (slug: string) => {
 	}
 };
 
-const EventPage = async ({ params: { slug } }: EventPageProps) => {
-	const event = await getEventBySlug(slug);
+const EventPage = ({ params: { slug } }: EventPageProps) => {
+	// const event = await getEventBySlug(slug);
+	// console.log(event);
+
+	const event = {
+		id: 31,
+		name: 'Example First Event in 2024',
+		slug: 'elo123',
+		thumbnail:
+			'https://res.cloudinary.com/eventicker/image/upload/v1725110305/dv0zhj5efjvsbyijhm6y.jpg',
+		location: 'ul. Przykładowa 1, 00-001 Warszawa',
+		status: 'PUBLISHED',
+		description: 'Description here',
+		start_date: '2024-08-22T11:30:22.955Z',
+		creator_id: 'sklivwkszw7fuiij',
+		created_at: '2024-08-27 09:52:03.065159',
+		updated_at: '2024-08-27 09:52:03.065159',
+	};
 
 	if (!event) {
 		return notFound();
@@ -63,9 +85,18 @@ const EventPage = async ({ params: { slug } }: EventPageProps) => {
 					/>
 				</AspectRatio>
 
-				<h1 className="text-2xl font-bold">{event.name}</h1>
-
-				{event.description && <div>{parse(event.description)}</div>}
+				<div className="flex flex-col justify-between gap-2 pt-1 md:flex-row md:pt-3">
+					<div className="order-2 md:order-1">
+						<h1 className="text-2xl font-bold">{event.name}</h1>
+						{event.description && <div>{parse(event.description)}</div>}
+					</div>
+					<EventDateCard
+						eventName={event.name}
+						eventLocation={event.location}
+						eventSlug={event.slug}
+						startDate={new Date(event.start_date)}
+					/>
+				</div>
 			</section>
 		</main>
 	);
