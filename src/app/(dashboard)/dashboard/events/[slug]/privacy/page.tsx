@@ -1,6 +1,8 @@
 import { PrivacyEditorForm } from '@/components/PrivacyEditorForm';
 import { selectEventSchema } from '@/schema/event';
 import { selectPrivacyPolicySchema } from '@/schema/privacy_policies';
+import { method } from 'lodash';
+import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { env } from 'process';
 
@@ -9,7 +11,22 @@ interface PrivacyEditPageProps {
 }
 
 const getCurrentPrivacyPolicy = async (slug: string) => {
-	const eventRes = await fetch(`${env.API_URL}/events?slug=${slug}`);
+	const eventRes = await fetch(
+		`${env.API_URL}/events?slug=${slug}&context=admin`,
+		{
+			method: 'GET',
+			credentials: 'include',
+			headers: {
+				Cookie: cookies().toString(),
+				'Content-Type': 'application/json',
+			},
+		},
+	);
+
+	if (eventRes.status === 404) {
+		return notFound();
+	}
+
 	const eventData = selectEventSchema.parse(await eventRes.json());
 
 	if (!eventData) {
