@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import {
 	ArrowLeft,
 	CalendarDays,
+	FileCheck2,
 	LayoutDashboard,
 	Settings,
 } from 'lucide-react';
@@ -49,6 +50,12 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 			name: 'back',
 			icon: <ArrowLeft />,
 			children: t('back'),
+		},
+		{
+			href: '/dashboard/events/etst1231532/privacy',
+			name: 'privacy',
+			icon: <FileCheck2 />,
+			children: 'Privacy policy',
 		},
 	];
 
