@@ -27,7 +27,7 @@ export const EventDateCard = ({
 	const locale = useLocale();
 
 	return (
-		<Card className="order-1 max-w-md rounded-lg bg-muted p-6 md:order-2">
+		<Card className="order-1 w-full max-w-md rounded-lg bg-muted p-6 md:order-2">
 			<div className="flex items-center gap-4">
 				<div className="rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground">
 					<p className="text-center text-sm uppercase">
