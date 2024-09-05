@@ -15,6 +15,7 @@ import { Logo } from '@/components/Logo';
 
 const LoginPage = async () => {
 	const { user } = await validateRequest();
+	// skipcq: JS-C1002
 	const t = await getTranslations('Login');
 
 	if (user) {
@@ -37,7 +38,7 @@ const LoginPage = async () => {
 				<CardFooter>
 					<p className="text-center text-muted-foreground">
 						{t('consent')}
-						<br></br>
+						<br />
 						<Link
 							href="/terms"
 							className="underline underline-offset-4 hover:text-primary"
