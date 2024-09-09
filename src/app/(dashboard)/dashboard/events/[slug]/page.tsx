@@ -5,6 +5,7 @@ import { EventStatus } from '@/components/EventStatus';
 import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
 import { cookies } from 'next/headers';
+import { EventPublishSteper } from '@/components/EventPublishSteper';
 
 interface EventAdminPageProps {
 	params: { slug: string };
@@ -33,14 +34,17 @@ const EventAdminPage = async ({ params: { slug } }: EventAdminPageProps) => {
 	console.log(event);
 
 	return (
-		<div className="flex items-center justify-between gap-2">
-			<div className="flex items-center gap-2">
-				<h1 className="text-2xl font-bold">{event.name}</h1>
-				<EventStatus status={event.status} />
+		<div className="flex flex-col justify-between gap-2">
+			<div className="flex flex-col justify-between gap-2 md:flex-row">
+				<div className="flex items-center gap-2">
+					<h1 className="text-2xl font-bold">{event.name}</h1>
+					<EventStatus status={event.status} />
+				</div>
+				{event.status === 'DRAFT' && (
+					<Button>🚀 {t('Events.Actions.publish')}</Button>
+				)}
 			</div>
-			{event.status === 'DRAFT' && (
-				<Button>🚀 {t('Events.Actions.publish')}</Button>
-			)}
+			<EventPublishSteper event={event} />
 		</div>
 	);
 };
