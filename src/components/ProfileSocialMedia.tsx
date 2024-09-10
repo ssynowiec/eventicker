@@ -6,6 +6,7 @@ import { NotConnectedBadge } from '@/components/NotConnectedBadge';
 import { getTranslations } from 'next-intl/server';
 import { validateRequest } from '@/lib/auth/validateRequests';
 import { redirect } from 'next/navigation';
+import { StripeConnectButton } from './StripeConnectButton';
 
 const PROVIDERS: { name: string; value: 'githubId'; icon: ReactNode }[] = [
 	{
@@ -27,6 +28,7 @@ export const ProfileSocialMedia = async () => {
 		<div className="flex flex-col gap-2 py-4">
 			<h2 className="text-xl font-medium">{t('socialMedia')}</h2>
 			<div className="flex gap-2">
+				<StripeConnectButton />
 				{PROVIDERS.map((provider) => (
 					<Card
 						key={provider.name}
