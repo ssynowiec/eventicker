@@ -43,6 +43,13 @@
       "when": 1725283500347,
       "tag": "0005_add_event_privacy_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1725966351865,
+      "tag": "0006_add_stripe_connection",
+      "breakpoints": true
     }
   ]
 }
