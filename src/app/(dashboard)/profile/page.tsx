@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { ProfileSocialMedia } from '@/components/ProfileSocialMedia';
 import { ProfileDangerZone } from '@/components/ProfileDangerZone';
 import { ProfileMyData } from '@/components/ProfileMyData';
+import { StripeConnectButton } from '@/components/StripeConnectButton';
 
 const ProfilePage = async () => {
 	const t = await getTranslations('Profile');
@@ -18,6 +19,7 @@ const ProfilePage = async () => {
 		<div>
 			<PageTitle>{t('title')}</PageTitle>
 			<ProfileMyData />
+			<StripeConnectButton user={user} />
 			<ProfileSocialMedia />
 			<ProfileDangerZone />
 		</div>
