@@ -13,6 +13,7 @@ export const env = createEnv({
 		RESEND_API_KEY: z.string(),
 		STRIPE_SECRET_KEY: z.string(),
 		STRIPE_PUBLIC_KEY: z.string(),
+		STRIPE_WEBHOOK_SECRET: z.string(),
 	},
 	client: {
 		NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
