@@ -2,6 +2,9 @@ import { lucia } from '@/lib/auth/auth';
 import { stripe } from '@/lib/stripe/stripe';
 
 import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/auth/db';
+import { userTable } from '@/schema/user';
+import { eq } from 'drizzle-orm';
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
 	const { user } = await lucia.validateSession(
@@ -20,12 +23,12 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 			type: 'express',
 		});
 
-		// await db
-		// 	.update(userTable)
-		// 	.set({
-		// 		stripe_account: account.id,
-		// 	})
-		// 	.where(eq(userTable.id, user.id));
+		await db
+			.update(userTable)
+			.set({
+				stripe_account_id: account.id,
+			})
+			.where(eq(userTable.id, user.id));
 
 		return NextResponse.json({ account: account.id });
 	} catch (error) {
