@@ -11,6 +11,7 @@ export const lucia = new Lucia(adapter, {
 	getUserAttributes: (attributes) => {
 		return {
 			githubId: attributes.github_id,
+			stripe_account_id: attributes.stripe_account_id,
 			name: attributes.name,
 			email: attributes.email,
 			avatar: attributes.avatar,
@@ -28,6 +29,7 @@ declare module 'lucia' {
 
 interface DatabaseUserAttributes {
 	github_id: string | null;
+	stripe_account_id: string | null;
 	name: string;
 	email: string;
 	avatar: string;
