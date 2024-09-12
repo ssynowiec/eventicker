@@ -6,6 +6,7 @@ import { FaStripeS } from 'react-icons/fa6';
 import { completeStripeAccountAction } from '@/actions/completeStripeAccountAction';
 import { useMutation } from '@tanstack/react-query';
 import { User } from 'lucia';
+import { createLoginStripeLinkAction } from '@/actions/createLoginStripeLinkAction';
 
 interface StripeConnectButtonProps {
 	user: User;
@@ -59,16 +60,29 @@ export const StripeConnectButton = ({ user }: StripeConnectButtonProps) => {
 						Connect with Stripe
 					</Button>
 				)}
-				{connectedAccountId && !completeStripeAccountIsPending && (
-					<Button
-						className="flex items-center justify-center gap-2 rounded-lg bg-[#635BFF] px-4 py-2 font-semibold text-white transition-colors duration-300 hover:bg-[#8983FF]"
-						onClick={() => {
-							completeStripeAccount();
-						}}
-					>
-						<FaStripeS />
-						Complete setup
-					</Button>
+				{connectedAccountId &&
+					!completeStripeAccountIsPending &&
+					!user.stripeConnected && (
+						<Button
+							className="flex items-center justify-center gap-2 rounded-lg bg-[#635BFF] px-4 py-2 font-semibold text-white transition-colors duration-300 hover:bg-[#8983FF]"
+							onClick={() => {
+								completeStripeAccount();
+							}}
+						>
+							<FaStripeS />
+							Complete setup
+						</Button>
+					)}
+				{connectedAccountId && user.stripeConnected && (
+					<form action={createLoginStripeLinkAction}>
+						<Button
+							type="submit"
+							className="flex items-center justify-center gap-2 rounded-lg bg-[#635BFF] px-4 py-2 font-semibold text-white transition-colors duration-300 hover:bg-[#8983FF]"
+						>
+							<FaStripeS />
+							Login to stripe dashboard
+						</Button>
+					</form>
 				)}
 				{createStripeAccountIsError ||
 					(completeStripeAccountIsError && (
