@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import createJiti from 'jiti';
+import { createJiti } from 'jiti';
 import createNextIntlPlugin from 'next-intl/plugin';
 import type { NextConfig } from 'next';
 
@@ -7,7 +7,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const jiti = createJiti(fileURLToPath(import.meta.url));
 
-jiti('./src/env');
+// jiti('./src/env');
 
 const nextConfig: NextConfig = {
 	images: {
