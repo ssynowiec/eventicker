@@ -10,9 +10,9 @@ interface EventIdParams {
 
 export const PUT = async (
 	req: NextRequest,
-	context: { params: EventIdParams },
+	context: { params: Promise<EventIdParams> },
 ) => {
-	const id = Number(context.params.id);
+	const id = Number((await context.params).id);
 
 	const events = await db
 		.select()

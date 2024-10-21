@@ -13,9 +13,9 @@ interface EventIdParams {
 
 export const GET = async (
 	req: NextRequest,
-	context: { params: EventIdParams },
+	context: { params: Promise<EventIdParams> },
 ) => {
-	const id = Number(context.params.id);
+	const id = Number((await context.params).id);
 
 	const privacy = await db
 		.select()
@@ -35,7 +35,7 @@ export const GET = async (
 
 export const POST = async (
 	req: NextRequest,
-	context: { params: EventIdParams },
+	context: { params: Promise<EventIdParams> },
 ) => {
 	const { user } = await lucia.validateSession(
 		req.cookies.get('auth_session')?.value ?? '',
@@ -50,7 +50,7 @@ export const POST = async (
 		});
 	}
 
-	const id = Number(context.params.id);
+	const id = Number((await context.params).id);
 
 	const newPrivacy = insertPrivacyPolicySchema.parse(await req.json());
 
@@ -66,7 +66,7 @@ export const POST = async (
 
 export const PUT = async (
 	req: NextRequest,
-	context: { params: EventIdParams },
+	context: { params: Promise<EventIdParams> },
 ) => {
 	const { user } = await lucia.validateSession(
 		req.cookies.get('auth_session')?.value ?? '',
@@ -78,7 +78,7 @@ export const PUT = async (
 		});
 	}
 
-	const id = Number(context.params.id);
+	const id = Number((await context.params).id);
 
 	const newPrivacy = insertPrivacyPolicySchema.parse(await req.json());
 

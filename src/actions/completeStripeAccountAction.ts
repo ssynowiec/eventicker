@@ -14,7 +14,7 @@ export const completeStripeAccountAction = actionClient
 			method: 'POST',
 			credentials: 'include',
 			headers: {
-				Cookie: cookies().toString(),
+				Cookie: (await cookies()).toString(),
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ account }),

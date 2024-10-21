@@ -10,7 +10,7 @@ interface EventIdParams {
 
 export const GET = async (
 	req: NextRequest,
-	context: { params: EventIdParams },
+	context: { params: Promise<EventIdParams> },
 ) => {
 	if (req.cookies.get('auth_session')?.value) {
 		const { user } = await lucia.validateSession(
@@ -30,7 +30,7 @@ export const GET = async (
 			.from(eventTable)
 			.where(
 				and(
-					eq(eventTable.id, Number(context.params.id)),
+					eq(eventTable.id, Number((await context.params).id)),
 					eq(eventTable.creator_id, user.id),
 				),
 			);
@@ -51,7 +51,7 @@ export const GET = async (
 		.from(eventTable)
 		.where(
 			and(
-				eq(eventTable.id, Number(context.params.id)),
+				eq(eventTable.id, Number((await context.params).id)),
 				eq(eventTable.status, 'PUBLISHED'),
 			),
 		);
@@ -69,9 +69,9 @@ export const GET = async (
 
 export const DELETE = async (
 	req: NextRequest,
-	context: { params: EventIdParams },
+	context: { params: Promise<EventIdParams> },
 ) => {
-	const id = Number(context.params.id);
+	const id = Number((await context.params).id);
 
 	try {
 		const deletedEvent = await db

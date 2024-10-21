@@ -19,7 +19,7 @@ const getAllEvents = async () => {
 		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/json',
-			Cookie: cookies().toString(),
+			Cookie: (await cookies()).toString(),
 		},
 	});
 	return selectEventsSchema.parse(await eventsRes.json());

@@ -8,7 +8,7 @@ import { cookies } from 'next/headers';
 import { EventPublishSteper } from '@/components/EventPublishSteper';
 
 interface EventAdminPageProps {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }
 
 const getEventBySlug = async (slug: string) => {
@@ -17,23 +17,29 @@ const getEventBySlug = async (slug: string) => {
 		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/json',
-			Cookie: cookies().toString(),
+			Cookie: (await cookies()).toString(),
 		},
 	});
 	return selectEventSchema.parse(await res.json());
 };
 
-const EventAdminPage = async ({ params: { slug } }: EventAdminPageProps) => {
-	const event = await getEventBySlug(slug);
-	const t = await getTranslations();
+const EventAdminPage = async (props: EventAdminPageProps) => {
+    const params = await props.params;
 
-	if (!event) {
+    const {
+        slug
+    } = params;
+
+    const event = await getEventBySlug(slug);
+    const t = await getTranslations();
+
+    if (!event) {
 		return notFound();
 	}
 
-	console.log(event);
+    console.log(event);
 
-	return (
+    return (
 		<div className="flex flex-col justify-between gap-2">
 			<div className="flex flex-col justify-between gap-2 md:flex-row">
 				<div className="flex items-center gap-2">

@@ -13,7 +13,7 @@ export const createNewEvent = async (data: NewEvent) => {
 		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/json',
-			Cookie: cookies().toString(),
+			Cookie: (await cookies()).toString(),
 		},
 		body: JSON.stringify(data),
 	});

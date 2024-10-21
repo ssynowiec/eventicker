@@ -10,7 +10,7 @@ import { ArrowLeft } from 'lucide-react';
 import { EventDateCard } from '@/components/EventDateCard';
 
 interface EventPageProps {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }
 
 const getEventBySlug = async (slug: string) => {
@@ -20,7 +20,7 @@ const getEventBySlug = async (slug: string) => {
 			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json',
-				Cookie: cookies().toString(),
+				Cookie: (await cookies()).toString(),
 			},
 		});
 		const data = await res.json();
@@ -37,30 +37,36 @@ const getEventBySlug = async (slug: string) => {
 	}
 };
 
-const EventPage = async ({ params: { slug } }: EventPageProps) => {
-	const event = await getEventBySlug(slug);
-	// console.log(event);
+const EventPage = async (props: EventPageProps) => {
+    const params = await props.params;
 
-	// const event = {
-	// 	id: 31,
-	// 	name: 'Example First Event in 2024',
-	// 	slug: 'elo123',
-	// 	thumbnail:
-	// 		'https://res.cloudinary.com/eventicker/image/upload/v1725110305/dv0zhj5efjvsbyijhm6y.jpg',
-	// 	location: 'ul. Przykładowa 1, 00-001 Warszawa',
-	// 	status: 'PUBLISHED',
-	// 	description: 'Description here',
-	// 	start_date: '2024-08-22T11:30:22.955Z',
-	// 	creator_id: 'sklivwkszw7fuiij',
-	// 	created_at: '2024-08-27 09:52:03.065159',
-	// 	updated_at: '2024-08-27 09:52:03.065159',
-	// };
+    const {
+        slug
+    } = params;
 
-	if (!event) {
+    const event = await getEventBySlug(slug);
+    // console.log(event);
+
+    // const event = {
+    // 	id: 31,
+    // 	name: 'Example First Event in 2024',
+    // 	slug: 'elo123',
+    // 	thumbnail:
+    // 		'https://res.cloudinary.com/eventicker/image/upload/v1725110305/dv0zhj5efjvsbyijhm6y.jpg',
+    // 	location: 'ul. Przykładowa 1, 00-001 Warszawa',
+    // 	status: 'PUBLISHED',
+    // 	description: 'Description here',
+    // 	start_date: '2024-08-22T11:30:22.955Z',
+    // 	creator_id: 'sklivwkszw7fuiij',
+    // 	created_at: '2024-08-27 09:52:03.065159',
+    // 	updated_at: '2024-08-27 09:52:03.065159',
+    // };
+
+    if (!event) {
 		return notFound();
 	}
 
-	return (
+    return (
 		<main className="min-h-svh">
 			<section className="mx-3 flex h-full max-w-5xl flex-col gap-2 py-2 md:mx-auto">
 				<Link

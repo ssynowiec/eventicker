@@ -13,7 +13,7 @@ const getEvents = async () => {
 		method: 'GET',
 		credentials: 'include',
 		headers: {
-			Cookie: cookies().toString(),
+			Cookie: (await cookies()).toString(),
 		},
 	});
 

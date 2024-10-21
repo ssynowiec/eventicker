@@ -14,7 +14,7 @@ export const updatePolicyActions = actionClient
 			method: 'PUT',
 			credentials: 'include',
 			headers: {
-				Cookie: cookies().toString(),
+				Cookie: (await cookies()).toString(),
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ eventId, privacyText }),

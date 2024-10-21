@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface PrivacyPolicyPageParams {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }
 
 const getEvent = async (slug: string) => {
@@ -33,17 +33,21 @@ const getPrivacyPolicies = async (slug: string) => {
 	return selectPrivacyPolicySchema.parse(await res.json());
 };
 
-const PrivacyPoliciesPage = async ({
-	params: { slug },
-}: PrivacyPolicyPageParams) => {
-	const privacyPolicies = await getPrivacyPolicies(slug);
-	const event = await getEvent(slug);
+const PrivacyPoliciesPage = async (props: PrivacyPolicyPageParams) => {
+    const params = await props.params;
 
-	if (!privacyPolicies || !privacyPolicies.privacyText || !event) {
+    const {
+        slug
+    } = params;
+
+    const privacyPolicies = await getPrivacyPolicies(slug);
+    const event = await getEvent(slug);
+
+    if (!privacyPolicies || !privacyPolicies.privacyText || !event) {
 		return notFound();
 	}
 
-	return (
+    return (
 		<main className="min-h-svh">
 			<section className="mx-3 flex h-full max-w-5xl flex-col gap-2 py-2 text-center md:mx-auto">
 				<Link

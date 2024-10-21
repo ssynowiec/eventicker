@@ -9,7 +9,7 @@ export const createStripeAccountAction = actionClient.action(async () => {
 		method: 'POST',
 		credentials: 'include',
 		headers: {
-			Cookie: cookies().toString(),
+			Cookie: (await cookies()).toString(),
 			'Content-Type': 'application/json',
 		},
 	});

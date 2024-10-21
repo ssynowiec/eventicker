@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { env } from 'process';
 
 interface PrivacyEditPageProps {
-	params: { slug: string };
+	params: Promise<{ slug: string }>;
 }
 
 const getCurrentPrivacyPolicy = async (slug: string) => {
@@ -17,7 +17,7 @@ const getCurrentPrivacyPolicy = async (slug: string) => {
 			method: 'GET',
 			credentials: 'include',
 			headers: {
-				Cookie: cookies().toString(),
+				Cookie: (await cookies()).toString(),
 				'Content-Type': 'application/json',
 			},
 		},
@@ -44,10 +44,16 @@ const getCurrentPrivacyPolicy = async (slug: string) => {
 	return selectPrivacyPolicySchema.parse(data);
 };
 
-const PrivacyEditPage = async ({ params: { slug } }: PrivacyEditPageProps) => {
-	const privacyPolicy = await getCurrentPrivacyPolicy(slug);
+const PrivacyEditPage = async (props: PrivacyEditPageProps) => {
+    const params = await props.params;
 
-	return (
+    const {
+        slug
+    } = params;
+
+    const privacyPolicy = await getCurrentPrivacyPolicy(slug);
+
+    return (
 		<div className="flex flex-col gap-2">
 			<PrivacyEditorForm privacyPolicy={privacyPolicy} />
 		</div>
