@@ -59,13 +59,6 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 					),
 				},
 				{
-					href: '/dashboard/events',
-					name: 'events',
-					icon: <CalendarDays />,
-					children: t('events'),
-					badge: events.length,
-				},
-				{
 					href: '/settings',
 					name: 'settings',
 					icon: <Settings />,

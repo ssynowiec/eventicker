@@ -46,7 +46,7 @@ export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 			<SidebarSeparator />
 			<SidebarContent>
 				{mainNav.map((section) => (
-					<SidebarGroup>
+					<SidebarGroup key={section.category}>
 						<SidebarGroupLabel>{section.category}</SidebarGroupLabel>
 						{section.categoryAction && (
 							<SidebarGroupAction title="Add Project">
