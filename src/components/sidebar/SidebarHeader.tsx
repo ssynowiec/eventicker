@@ -1,34 +1,30 @@
+import {
+	SidebarHeader as SidebarHeaderComponent,
+	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
+} from '@/components/ui/sidebar';
 import { Logo } from '@/components/Logo';
-import Link from 'next/link';
 
-interface SidebarHeaderProps {
-	isCollapsed: boolean;
-}
-
-export const SidebarHeader = ({ isCollapsed }: SidebarHeaderProps) => {
-	return isCollapsed ? (
-		<div className="flex h-[4.1rem] w-full items-center justify-center border-b-2 border-b-muted px-6 py-4 md:p-0">
-			<div className="gap -4 m-2 flex items-center">
-				<Link
-					href="/"
-					className="flex w-full items-center justify-center gap-2"
-				>
-					<Logo />
-					<span className="sr-only text-2xl font-semibold">Eventicker</span>
-				</Link>
-			</div>
-		</div>
-	) : (
-		<div className="flex items-center justify-between border-b-2 border-b-muted px-6 py-4">
-			<div className="gap -4 flex">
-				<Link
-					href="/"
-					className="flex w-full items-center justify-center gap-2"
-				>
-					<Logo />
-					<h1 className="text-2xl font-semibold">Eventicker</h1>
-				</Link>
-			</div>
-		</div>
+export const SidebarHeader = () => {
+	return (
+		<SidebarHeaderComponent>
+			<SidebarMenu>
+				<SidebarMenuItem>
+					<SidebarMenuButton size="lg" asChild>
+						<a href="/">
+							<div className="text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+								<Logo />
+								{/*<Command className="size-4" />*/}
+							</div>
+							<div className="grid flex-1 text-left text-sm leading-tight">
+								<span className="truncate font-semibold">Eventicker</span>
+								{/*<span className="truncate text-xs">Enterprise</span>*/}
+							</div>
+						</a>
+					</SidebarMenuButton>
+				</SidebarMenuItem>
+			</SidebarMenu>
+		</SidebarHeaderComponent>
 	);
 };

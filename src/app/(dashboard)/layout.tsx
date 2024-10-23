@@ -10,14 +10,31 @@ import {
 } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { DashboardLayout as DashboardLayoutRoot } from '@/components/DashboardLayout';
+import { Badge } from '@/components/ui/badge';
+import { cookies } from 'next/headers';
+import { selectEventsSchema } from '@/schema/event';
+import { env } from '@/env';
 
 interface DashboardLayoutProps {
 	children: ReactNode;
 }
 
+const getAllEvents = async () => {
+	const eventsRes = await fetch(`${env.API_URL}/events?context=admin`, {
+		method: 'GET',
+		credentials: 'include',
+		headers: {
+			'Content-Type': 'application/json',
+			Cookie: (await cookies()).toString(),
+		},
+	});
+	return selectEventsSchema.parse(await eventsRes.json());
+};
+
 const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 	const { user } = await validateRequest();
 	const t = await getTranslations('Dashboard.Sidebar.Menu');
+	const events = await getAllEvents();
 
 	if (!user) {
 		return redirect('/login');
@@ -25,22 +42,43 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 
 	const MAIN_NAV_LINKS = [
 		{
-			href: '/dashboard',
-			name: 'dashboard',
-			icon: <LayoutDashboard />,
-			children: t('dashboard'),
+			category: 'Application',
+			links: [
+				{
+					href: '/dashboard',
+					name: 'dashboard',
+					icon: LayoutDashboard,
+					children: t('dashboard'),
+					badge: <Badge>New</Badge>,
+				},
+				{
+					href: '/dashboard/events',
+					name: 'events',
+					icon: CalendarDays,
+					children: t('events'),
+					badge: events.length,
+				},
+				{
+					href: '/settings',
+					name: 'settings',
+					icon: Settings,
+					children: t('settings'),
+				},
+			],
 		},
 		{
-			href: '/dashboard/events',
-			name: 'events',
-			icon: <CalendarDays />,
-			children: t('events'),
-		},
-		{
-			href: '/settings',
-			name: 'settings',
-			icon: <Settings />,
-			children: t('settings'),
+			category: 'Events',
+			categoryAction: '/dashboard/events/add',
+			categoryActionText: 'Add Event',
+			links: [
+				{
+					href: '/dashboard/events',
+					name: 'events',
+					icon: CalendarDays,
+					children: t('events'),
+					badge: '15',
+				},
+			],
 		},
 	];
 
@@ -48,13 +86,13 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 		{
 			href: '/dashboard/events',
 			name: 'back',
-			icon: <ArrowLeft />,
+			icon: ArrowLeft,
 			children: t('back'),
 		},
 		{
 			href: '/dashboard/events/etst1231532/privacy',
 			name: 'privacy',
-			icon: <FileCheck2 />,
+			icon: FileCheck2,
 			children: 'Privacy policy',
 		},
 	];

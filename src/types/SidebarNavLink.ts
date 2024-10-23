@@ -1,8 +1,17 @@
-import type { ReactNode } from 'react';
+import type { LucideProps } from 'lucide-react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export interface SidebarNavLink {
-	href: string;
-	name: string;
-	icon: ReactNode;
-	children: string;
+	category: string | undefined;
+	categoryAction: string | undefined;
+	categoryActionText: string | undefined;
+	links: {
+		href: string;
+		name: string;
+		icon: ForwardRefExoticComponent<
+			Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
+		>;
+		children: string;
+		badge: Element | undefined;
+	}[];
 }
