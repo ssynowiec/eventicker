@@ -1,3 +1,5 @@
+'use server';
+
 import { ReactNode } from 'react';
 import { validateRequest } from '@/lib/auth/validateRequests';
 import { redirect } from 'next/navigation';
@@ -14,6 +16,7 @@ import { Badge } from '@/components/ui/badge';
 import { cookies } from 'next/headers';
 import { selectEventsSchema } from '@/schema/event';
 import { env } from '@/env';
+import { SidebarNavLink } from '@/types/SidebarNavLink';
 
 interface DashboardLayoutProps {
 	children: ReactNode;
@@ -40,28 +43,32 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 		return redirect('/login');
 	}
 
-	const MAIN_NAV_LINKS = [
+	const MAIN_NAV_LINKS: SidebarNavLink[] = [
 		{
 			category: 'Application',
 			links: [
 				{
 					href: '/dashboard',
 					name: 'dashboard',
-					icon: LayoutDashboard,
+					icon: <LayoutDashboard />,
 					children: t('dashboard'),
-					badge: <Badge>New</Badge>,
+					badge: (
+						<>
+							<Badge>New</Badge>
+						</>
+					),
 				},
 				{
 					href: '/dashboard/events',
 					name: 'events',
-					icon: CalendarDays,
+					icon: <CalendarDays />,
 					children: t('events'),
 					badge: events.length,
 				},
 				{
 					href: '/settings',
 					name: 'settings',
-					icon: Settings,
+					icon: <Settings />,
 					children: t('settings'),
 				},
 			],
@@ -74,7 +81,7 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 				{
 					href: '/dashboard/events',
 					name: 'events',
-					icon: CalendarDays,
+					icon: <CalendarDays />,
 					children: t('events'),
 					badge: '15',
 				},
@@ -82,18 +89,23 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 		},
 	];
 
-	const EVENTS_NAV_LINKS = [
+	const EVENTS_NAV_LINKS: SidebarNavLink[] = [
 		{
-			href: '/dashboard/events',
-			name: 'back',
-			icon: ArrowLeft,
-			children: t('back'),
-		},
-		{
-			href: '/dashboard/events/etst1231532/privacy',
-			name: 'privacy',
-			icon: FileCheck2,
-			children: 'Privacy policy',
+			category: 'Event',
+			links: [
+				{
+					href: '/dashboard/events',
+					name: 'back',
+					icon: <ArrowLeft />,
+					children: t('back'),
+				},
+				{
+					href: '/dashboard/events/etst1231532/privacy',
+					name: 'privacy',
+					icon: <FileCheck2 />,
+					children: 'Privacy policy',
+				},
+			],
 		},
 	];
 

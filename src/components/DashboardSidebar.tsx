@@ -1,3 +1,5 @@
+'use client';
+
 import {
 	Sidebar,
 	SidebarContent,
@@ -11,6 +13,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarSeparator,
+	useSidebar,
 } from '@/components/ui/sidebar';
 import { SidebarUserMenu } from '@/components/sidebar/SidebarUserMenu';
 import { User } from 'lucia';
@@ -25,6 +28,7 @@ import {
 	CardTitle,
 } from './ui/card';
 import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 
 interface DashboardSidebarProps {
 	user: User;
@@ -32,6 +36,10 @@ interface DashboardSidebarProps {
 }
 
 export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
+	const pathname = usePathname();
+
+	const { open, state } = useSidebar();
+
 	return (
 		<Sidebar collapsible="icon">
 			<SidebarHeader />
@@ -50,9 +58,12 @@ export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 							<SidebarMenu>
 								{section.links.map((item) => (
 									<SidebarMenuItem key={item.name}>
-										<SidebarMenuButton asChild>
+										<SidebarMenuButton
+											asChild
+											isActive={pathname === item.href}
+										>
 											<a href={item.href}>
-												<item.icon />
+												{item.icon}
 												<span>{item.name}</span>
 											</a>
 										</SidebarMenuButton>
@@ -67,28 +78,6 @@ export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 				))}
 				<SidebarGroup className="mt-auto">
 					<SidebarGroupContent>
-						<div className="p-1">
-							<Card className="shadow-none">
-								<form>
-									<CardHeader className="p-4 pb-0">
-										<CardTitle className="text-sm">Update your plan</CardTitle>
-										<CardDescription>
-											You are currently on the free plan.
-										</CardDescription>
-									</CardHeader>
-									<CardContent className="grid gap-2.5 p-4">
-										{/*<SidebarInput type="email" placeholder="Email" />*/}
-										<Button
-											className="bg-sidebar-primary text-sidebar-primary-foreground w-full shadow-none"
-											size="sm"
-										>
-											Upgrade to PRO
-										</Button>
-									</CardContent>
-								</form>
-							</Card>
-						</div>
-
 						<SidebarMenu>
 							{[
 								{
@@ -107,6 +96,32 @@ export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 								</SidebarMenuItem>
 							))}
 						</SidebarMenu>
+
+						{state !== 'collapsed' && (
+							<div className="p-1">
+								<Card className="shadow-none">
+									<form>
+										<CardHeader className="p-4 pb-0">
+											<CardTitle className="text-sm">
+												Update your plan
+											</CardTitle>
+											<CardDescription>
+												You are currently on the free plan.
+											</CardDescription>
+										</CardHeader>
+										<CardContent className="grid gap-2.5 p-4">
+											{/*<SidebarInput type="email" placeholder="Email" />*/}
+											<Button
+												className="bg-sidebar-primary text-sidebar-primary-foreground w-full shadow-none"
+												size="sm"
+											>
+												Upgrade to PRO
+											</Button>
+										</CardContent>
+									</form>
+								</Card>
+							</div>
+						)}
 					</SidebarGroupContent>
 				</SidebarGroup>
 			</SidebarContent>
