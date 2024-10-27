@@ -20,26 +20,29 @@ const getEventBySlug = async (slug: string) => {
 			Cookie: (await cookies()).toString(),
 		},
 	});
+
+	if (res.status === 404) {
+		return null;
+	}
+
 	return selectEventSchema.parse(await res.json());
 };
 
 const EventAdminPage = async (props: EventAdminPageProps) => {
-    const params = await props.params;
+	const params = await props.params;
 
-    const {
-        slug
-    } = params;
+	const { slug } = params;
 
-    const event = await getEventBySlug(slug);
-    const t = await getTranslations();
+	const event = await getEventBySlug(slug);
+	const t = await getTranslations();
 
-    if (!event) {
+	if (!event) {
 		return notFound();
 	}
 
-    console.log(event);
+	console.log(event);
 
-    return (
+	return (
 		<div className="flex flex-col justify-between gap-2">
 			<div className="flex flex-col justify-between gap-2 md:flex-row">
 				<div className="flex items-center gap-2">

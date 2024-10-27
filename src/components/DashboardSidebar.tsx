@@ -28,7 +28,7 @@ import {
 	CardTitle,
 } from './ui/card';
 import { Button } from '@/components/ui/button';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 
 interface DashboardSidebarProps {
 	user: User;
@@ -38,7 +38,7 @@ interface DashboardSidebarProps {
 export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 	const pathname = usePathname();
 
-	const { open, state } = useSidebar();
+	const { state } = useSidebar();
 
 	return (
 		<Sidebar collapsible="icon">
@@ -50,7 +50,9 @@ export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 						<SidebarGroupLabel>{section.category}</SidebarGroupLabel>
 						{section.categoryAction && (
 							<SidebarGroupAction title="Add Project">
-								<Plus />{' '}
+								<Plus
+									onClick={() => redirect(section.categoryAction as string)}
+								/>{' '}
 								<span className="sr-only">{section.categoryActionText}</span>
 							</SidebarGroupAction>
 						)}
@@ -110,9 +112,8 @@ export const DashboardSidebar = ({ user, mainNav }: DashboardSidebarProps) => {
 											</CardDescription>
 										</CardHeader>
 										<CardContent className="grid gap-2.5 p-4">
-											{/*<SidebarInput type="email" placeholder="Email" />*/}
 											<Button
-												className="bg-sidebar-primary text-sidebar-primary-foreground w-full shadow-none"
+												className="w-full bg-sidebar-primary text-sidebar-primary-foreground shadow-none"
 												size="sm"
 											>
 												Upgrade to PRO

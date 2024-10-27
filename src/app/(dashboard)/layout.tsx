@@ -68,7 +68,7 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
 		},
 		{
 			category: 'Events',
-			categoryAction: '/dashboard/events/add',
+			categoryAction: '/dashboard/events/new',
 			categoryActionText: 'Add Event',
 			links: [
 				{
